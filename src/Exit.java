@@ -6,6 +6,7 @@ import java.util.Scanner;
 
         public Exit() {
             System.exit(0);
+            System.out.println("");
         }
     }
 
