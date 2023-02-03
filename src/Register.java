@@ -1,16 +1,13 @@
 import java.util.Scanner;
 
 
-    public class Register {
-        String userName;
-        String password;
+public class Register {
 
-        public Register(String userName,String password) {
-            this.userName = userName;
-            this.password = password;
-            UserContainer.map.put(userName,password);
-            System.out.println("Registration was successful");
 
-        }
+    public void Registry(String setName, String setPassword) {
+        UserContainer.map.put(setName, setPassword);
+        System.out.println("Registration was successful");
+
     }
+}
 
