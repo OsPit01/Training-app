@@ -6,7 +6,8 @@ import java.util.Scanner;
 
         public Exit() {
             System.exit(0);
-            System.out.println("new feature");
+ oss/new_branch
+            System.out.println("");
         }
     }
 
