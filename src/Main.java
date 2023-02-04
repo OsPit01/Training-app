@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-   static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         String userName;
@@ -31,7 +31,7 @@ public class Main {
                     userName = scanner.nextLine();
                     System.out.println("create password ");
                     password = scanner.nextLine();
-                    Register  registerCommand = new Register();
+                    Register registerCommand = new Register();
                     registerCommand.registry(userName, password);
                     break;
                 case CommandConstants.EXIT_CODE:

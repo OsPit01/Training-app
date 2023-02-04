@@ -1,11 +1,11 @@
 
 
 
-    public class Exit {
+public class Exit {
 
-        public Exit() {
-            System.exit(0);
- 
-        }
+    public Exit() {
+        System.exit(0);
+
     }
+}
 
