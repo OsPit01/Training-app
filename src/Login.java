@@ -1,11 +1,10 @@
 
-    import java.util.Scanner;
 
     public class Login {
 
 
         public void excute(String setName,String setPassword) {
- if (UserContainer.isNameExists(setName,setPassword)) {
+ if (UserContainer.isExistsNameAndPassword(setName,setPassword)) {
      System.out.println("\n" + "Successful entry");
  }
  else {

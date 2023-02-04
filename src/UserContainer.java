@@ -5,22 +5,27 @@ import java.util.Set;
 public class UserContainer {
 
 
-    static Map<String, String> map = new HashMap<String, String>();
+    private static Map<String, String> users = new HashMap<String, String>();
 
-    public UserContainer() {
+    public static void setMap(Map<String, String> users) {
+        UserContainer.users = users;
     }
 
-    public static boolean isNameExists(String name, String password) {
-        boolean flag = false;
+    public static Map<String, String> getUsers() {
+        return users;
+    }
 
-        if (map.containsKey(name) && map.containsValue(password)) {
-            flag = true;
+    public static boolean isExistsNameAndPassword(String name, String password) {
+        boolean existsNameAndPassword = false;
+
+        if (users.containsKey(name) && users.containsValue(password)) {
+            existsNameAndPassword = true;
         }
-        return flag;
+        return existsNameAndPassword;
     }
 
-    public void getList() {
-        Set<String> list = map.keySet();
+    public void printUsers() {
+        Set<String> list = users.keySet();
         for (String k : list) {
             System.out.print("username" + " " + k + "\n");
         }
