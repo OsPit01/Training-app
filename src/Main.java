@@ -1,15 +1,11 @@
 import java.util.Scanner;
 
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String userName;
-        String password;
-
 
         while (true) {
-
             System.out.println("******** Register *********");
             System.out.println("please do choice");
             System.out.println("1.Login 2.Register 3.exit 4.showMe list");
@@ -18,25 +14,27 @@ public class Main {
             switch (choice) {
                 case CommandConstants.LOGIN_CODE:
                     System.out.println("Your name");
-                    userName = scanner.nextLine();
+                    String existName = scanner.nextLine();
                     System.out.println("password");
-                    password = scanner.nextLine();
+                    String existPassword = scanner.nextLine();
                     Login loginCommand = new Login();
-                    loginCommand.excute(userName, password);
-
+                    loginCommand.execute(existName, existPassword);
                     break;
+
                 case CommandConstants.REGISTER_CODE:
                     System.out.println("Create your account \n");
                     System.out.println("Your name");
-                    userName = scanner.nextLine();
+                    String creatUserName = scanner.nextLine();
                     System.out.println("create password ");
-                    password = scanner.nextLine();
+                    String creatPassword = scanner.nextLine();
                     Register registerCommand = new Register();
-                    registerCommand.registry(userName, password);
+                    registerCommand.registr(creatUserName,creatPassword);
                     break;
+
                 case CommandConstants.EXIT_CODE:
-                    new Exit();
+                    new Exit().exit();
                     break;
+
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     new UserContainer().printUsers();
                     break;

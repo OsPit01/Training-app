@@ -1,11 +1,7 @@
 
-
-
 public class Exit {
-
-    public Exit() {
+    public void exit() {
         System.exit(0);
-
     }
 }
 
