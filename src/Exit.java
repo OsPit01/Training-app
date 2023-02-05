@@ -4,4 +4,3 @@ public class Exit {
         System.exit(0);
     }
 }
-

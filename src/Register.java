@@ -6,4 +6,3 @@ public class Register {
         System.out.println("Registration was successful");
     }
 }
-
