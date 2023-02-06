@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserContainer {
-   final private static Map<String, String> users = new HashMap<String, String>();
+   private final static Map<String, String> users = new HashMap<String, String>();
 
     public static Map<String, String> getUsers() {
         return users;

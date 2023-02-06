@@ -1,6 +1,6 @@
 
 public class Login {
-    public void execute(String userName, String userPassword) {
+    public void commandExecute(String userName, String userPassword) {
         if (UserContainer.isUserNameAndPasswordExisits(userName, userPassword)) {
             System.out.println("\n" + "Successful entry");
         } else {
