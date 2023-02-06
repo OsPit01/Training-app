@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class UserContainer {
     private static Map<String, String> users = new HashMap<String, String>();
@@ -13,19 +12,12 @@ public class UserContainer {
         return users;
     }
 
-    public static boolean isNameAndPasswordExisits(String name, String password) {
-        boolean existsNameAndPassword = false;
+    public static boolean isUserNameAndPasswordExisits(String name, String password) {
+        boolean isUserNameAndPasswordExisits = false;
 
         if (users.containsKey(name) && users.containsValue(password)) {
-            existsNameAndPassword = true;
+            isUserNameAndPasswordExisits= true;
         }
-        return existsNameAndPassword;
-    }
-
-    public static void printUsers() {
-        Set<String> userNames = users.keySet();
-        for (String reveive : userNames) {
-            System.out.print("username" + " " + reveive + "\n");
-        }
+        return isUserNameAndPasswordExisits;
     }
 }
