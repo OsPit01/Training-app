@@ -18,7 +18,7 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     Login loginCommand = new Login();
-                    loginCommand.commandExecute(inputName, inputPassword);
+                    loginCommand.execute(inputName, inputPassword);
                     break;
 
                 case CommandConstants.REGISTER_CODE:
@@ -28,15 +28,17 @@ public class Main {
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     Register registerCommand = new Register();
-                    registerCommand.commandRegister(createUserName, createPassword);
+                    registerCommand.register(createUserName, createPassword);
                     break;
 
                 case CommandConstants.EXIT_CODE:
-                    new Exit().commandExit();
+                    Exit exitCommand = new Exit();
+                    exitCommand.exit();
                     break;
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
-                    new PrintUsers().commandPrintUsers();
+                    PrintUsers printUsersCommand = new PrintUsers();
+                    printUsersCommand.printUsers();
                     break;
             }
         }

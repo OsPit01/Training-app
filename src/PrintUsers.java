@@ -1,7 +1,7 @@
 import java.util.Set;
 
 public class PrintUsers {
-    public void commandPrintUsers() {
+    public void printUsers() {
 
         Set<String> userNames = UserContainer.getUsers().keySet();
         for (String userName : userNames) {

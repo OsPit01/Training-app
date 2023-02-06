@@ -1,6 +1,6 @@
 
 public class Exit {
-    public void commandExit() {
+    public void exit() {
         System.exit(0);
     }
 }

@@ -8,7 +8,7 @@ public class UserContainer {
         return users;
     }
 
-    public static boolean isUserNameAndPasswordExisits(String userName, String password) {
+    public static boolean isUserNameAndPasswordExists(String userName, String password) {
         boolean userExists = false;
 
         if (users.containsKey(userName) && users.containsValue(password)) {
