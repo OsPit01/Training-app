@@ -4,20 +4,16 @@ import java.util.Map;
 public class UserContainer {
     private static Map<String, String> users = new HashMap<String, String>();
 
-    public static void setMap(Map<String, String> setNameUsers) {
-        UserContainer.users = setNameUsers;
-    }
-
     public static Map<String, String> getUsers() {
         return users;
     }
 
-    public static boolean isUserNameAndPasswordExisits(String name, String password) {
-        boolean isUserNameAndPasswordExisits = false;
+    public static boolean isUserNameAndPasswordExisits(String userName, String password) {
+        boolean userExists = false;
 
-        if (users.containsKey(name) && users.containsValue(password)) {
-            isUserNameAndPasswordExisits= true;
+        if (users.containsKey(userName) && users.containsValue(password)) {
+            userExists = true;
         }
-        return isUserNameAndPasswordExisits;
+        return userExists;
     }
 }

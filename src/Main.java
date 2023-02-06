@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    final static Scanner scanner = new Scanner(System.in);
+    private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -36,7 +36,7 @@ public class Main {
                     break;
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
-                    PrintUsers.printUsers();
+                    new PrintUsers().printUsers();
                     break;
             }
         }
