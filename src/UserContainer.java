@@ -1,30 +1,19 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class UserContainer {
+   private final static Map<String, String> users = new HashMap<String, String>();
 
-
-    static Map<String, String> map = new HashMap<String, String>();
-
-    public UserContainer() {
+    public static Map<String, String> getUsers() {
+        return users;
     }
 
-    public static boolean isNameExists(String name, String password) {
-        boolean flag = false;
+    public static boolean isUserNameAndPasswordExists(String userName, String password) {
+        boolean userExists = false;
 
-        if (map.containsKey(name) && map.containsValue(password)) {
-            flag = true;
+        if (users.containsKey(userName) && users.containsValue(password)) {
+            userExists = true;
         }
-        return flag;
-    }
-
-    public void getList() {
-        Set<String> list = map.keySet();
-        for (String k : list) {
-            System.out.print("username" + " " + k + "\n");
-        }
+        return userExists;
     }
 }
-
-
