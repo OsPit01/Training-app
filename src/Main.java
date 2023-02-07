@@ -19,16 +19,22 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputName, inputPassword);
+
                     break;
 
                 case CommandConstants.REGISTER_CODE:
                     System.out.println("Create your account \n");
-                    System.out.println("Your name");
+                    System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.register(createUserName, createPassword);
+                    System.out.println("\ninput your name");
+                    String name = scanner.nextLine();
+                    System.out.println("\ninput your surname");
+                    String surname = scanner.nextLine();
+                    new User(name,surname);
                     break;
 
                 case CommandConstants.EXIT_CODE:
