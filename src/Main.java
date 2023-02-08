@@ -1,9 +1,13 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+
     private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        List<String> b = new ArrayList<>();
+        b.add("dsfsdgsdg + fdsfsdfdsf + fdsfsdfsd");
+        System.out.println(b);
 
         while (true) {
             System.out.println("******** Register *********");
@@ -34,7 +38,9 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
-                    new User(name,surname);
+                    User a = new User();
+                    a.addInfo(name,surname,createPassword,createPassword);
+
                     break;
 
                 case CommandConstants.EXIT_CODE:
