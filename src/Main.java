@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class Main {
 
@@ -32,14 +34,13 @@ public class Main {
                     String createPassword = scanner.nextLine();
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.register(createUserName, createPassword);
-
                     System.out.println("\ninput your name");
                     String name = scanner.nextLine();
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
                     registerCommand.register(createUserName,createPassword);
-                    User add = new User();
-                    add.addUser(name,surname,createUserName,createPassword);
+                    User user = new User(name,surname,createUserName,createPassword);
+                    UserContainer.getInfoUser().add(user);
                     break;
 
                 case CommandConstants.EXIT_CODE:
