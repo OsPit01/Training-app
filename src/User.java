@@ -2,14 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-
- static List<String> infoUser = new ArrayList<>();
     String name;
     String surname;
+    int id;
     String login;
     String password;
 
-    public void addInfo(String name, String surname, String login, String password) {
+    public void addUser(String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
         this.login = login;
@@ -32,13 +31,11 @@ public class User {
         return password;
     }
 
-
-
-    public void addInArray() {
-        String result = "username:" + " " + getName() + " " + "surname:" + " " + getSurname() + " " + "login:" + getLogin() + " " + "password:" + getPassword();
-         infoUser.add(result);
-        System.out.println(infoUser);
-
-       }
+    public int getId() {
+        return id;
     }
+   // public void call() {
+    //    System.out.printf("name: %s; surname: %s; id: %d; login: %s \n",name,surname,id,login,password);
+  //  }
+}
 
