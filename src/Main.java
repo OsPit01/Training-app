@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> b = new ArrayList<>();
-        b.add("dsfsdgsdg + fdsfsdfdsf + fdsfsdfsd");
         System.out.println(b);
 
         while (true) {
@@ -23,7 +22,6 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputName, inputPassword);
-
                     break;
 
                 case CommandConstants.REGISTER_CODE:
@@ -34,13 +32,14 @@ public class Main {
                     String createPassword = scanner.nextLine();
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.register(createUserName, createPassword);
+
                     System.out.println("\ninput your name");
                     String name = scanner.nextLine();
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
-                    User a = new User();
-                    a.addInfo(name,surname,createPassword,createPassword);
-
+                    registerCommand.register(createUserName,createPassword);
+                    User add = new User();
+                    add.addUser(name,surname,createUserName,createPassword);
                     break;
 
                 case CommandConstants.EXIT_CODE:
