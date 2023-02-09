@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
     private String name;
     private String surname;
-    private int id;
+    private int id = Integer.MAX_VALUE;
     private String login;
     private String password;
+
     public User(String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
@@ -34,4 +32,13 @@ public class User {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "User:" + "\n" +
+                "name:" + name +
+                ", surname:" + surname +
+                ", id:" + id +
+                ", login:" + login +
+                ", password:" + password + "\n";
+    }
 }

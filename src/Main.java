@@ -1,14 +1,11 @@
-import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        List<String> b = new ArrayList<>();
-        System.out.println(b);
+
 
         while (true) {
             System.out.println("******** Register *********");
@@ -22,25 +19,19 @@ public class Main {
                     String inputName = scanner.nextLine();
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
-                    LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputName, inputPassword);
                     break;
 
                 case CommandConstants.REGISTER_CODE:
-                    System.out.println("Create your account \n");
+                    System.out.println("Create your account");
                     System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
-                    RegisterCommand registerCommand = new RegisterCommand();
-                    registerCommand.register(createUserName, createPassword);
                     System.out.println("\ninput your name");
                     String name = scanner.nextLine();
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
-                    registerCommand.register(createUserName,createPassword);
-                    User user = new User(name,surname,createUserName,createPassword);
-                    UserContainer.getInfoUser().add(user);
+                    new RegisterCommand().register(name, surname, createUserName, createPassword);
                     break;
 
                 case CommandConstants.EXIT_CODE:
