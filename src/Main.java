@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,12 +20,18 @@ public class Main {
                     String inputName = scanner.nextLine();
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
+                    LoginCommand loginCommand = new LoginCommand();
+                    loginCommand.execute(inputName,inputPassword);
                     break;
 
                 case CommandConstants.REGISTER_CODE:
                     System.out.println("Create your account");
                     System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
+                    if(UserContainer.getInfoUser().toString().contains(createUserName)) {
+                        System.out.println("such a user exist already");
+                        return;
+                    }
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     System.out.println("\ninput your name");
