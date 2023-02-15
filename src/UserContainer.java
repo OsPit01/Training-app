@@ -5,15 +5,18 @@ public class UserContainer {
 
     private final static List<User> users = new ArrayList();
 
-    public static List<User> getInfoUser() {
+    public final static List<User> getUsers() {
         return users;
     }
 
-    public static boolean isUserNameAndPasswordExists(String username, String password) {
+    public static boolean isUserNameAndPasswordExists(String userName, String password) {
         boolean existUser = false;
-        int index = users.indexOf(username);
-        if (users.get(index + 1).toString().contains(password)) {
-            existUser = true;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(userName)) {
+                if (users.get(i).getPassword().equals(password)) {
+                    existUser = true;
+                }
+            }
         }
         return existUser;
     }

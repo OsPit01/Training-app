@@ -1,11 +1,10 @@
 
 public class LoginCommand {
-    public void execute (String userName,String userPassword) {
+    public void execute(String userName, String Password) {
 
-        if(UserContainer.isUserNameAndPasswordExists(userName,userPassword)) {
+        if (UserContainer.isUserNameAndPasswordExists(userName,Password)) {
             System.out.println("\n" + "Successful entry");
-        }
-        else {
+        } else {
             System.out.println("wrong username or password");
         }
     }

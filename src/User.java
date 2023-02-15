@@ -1,15 +1,22 @@
 public class User {
+    private String username;
+    private String password;
     private String name;
     private String surname;
-    private int id = Integer.MAX_VALUE;
-    private String login;
-    private String password;
 
-    public User(String name, String surname, String login, String password) {
+    public User(String login, String password, String name, String surname) {
+        this.username = login;
+        this.password = password;
         this.name = name;
         this.surname = surname;
-        this.login = login;
-        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -20,25 +27,17 @@ public class User {
         return surname;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "User:" + " " + username  + " " +
+                "password:" + " " + password + " " +
+                "name:" + " " + name + " " +
+                "surname:" + " " + surname + "\n";
     }
 
     @Override
-    public String toString() {
-        return "User:" + "\n" +
-                "name:" + name +
-                ", surname:" + surname +
-                ", id:" + id +
-                ", login:" + login +
-                ", password:" + password + "\n";
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        return username.equals(user) || password.equals(user);
     }
 }
