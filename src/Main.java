@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws UserNotFoundException {
+    public static void main(String[] args) {
 
         while (true) {
             System.out.println("******** Register *********");
@@ -13,7 +13,6 @@ public class Main {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-
                 case CommandConstants.LOGIN_CODE:
                     System.out.println("Your username");
                     String inputUsername = scanner.nextLine();
@@ -41,10 +40,8 @@ public class Main {
                     break;
 
                 case CommandConstants.EXIT_CODE:
-
                     ExitCommand exitCommand = new ExitCommand();
                     exitCommand.exit();
-
                     break;
 
                 case CommandConstants.SHOW_ME_LIST_CODE:

@@ -29,9 +29,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "User:" + " " + username + " " +
+        return "User:" + " " + username  + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        return username.equals(user) || password.equals(user);
     }
 }
