@@ -4,7 +4,7 @@ public class Main {
 
     private final static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UserNotFoundException {
 
         while (true) {
             System.out.println("******** Register *********");
