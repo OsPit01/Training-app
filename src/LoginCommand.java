@@ -1,11 +1,16 @@
 
 public class LoginCommand {
-    public void execute(String userName, String Password) throws UserNotFoundException {
+    public void execute(String userName, String Password) {
 
-        if (UserContainer.isUserNameAndPasswordExists(userName, Password)) {
-            System.out.println("\n" + "Successful entry");
-        } else {
-            System.out.println("wrong username or password");
+        try {
+            if (UserContainer.isUserNameAndPasswordExists(userName, Password)) {
+                System.out.println("\n" + "Successful entry");
+            }
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("try to enter the correct username and password");
+
         }
     }
+
 }
