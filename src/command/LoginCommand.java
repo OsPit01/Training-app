@@ -2,7 +2,6 @@ package command;
 
 import container.UserContainer;
 import exception.LoginCommandException;
-import exception.UserNotFoundException;
 
 public class LoginCommand {
     public void execute(String userName, String password) throws LoginCommandException {
