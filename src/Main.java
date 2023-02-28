@@ -4,6 +4,7 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
+import exception.LoginCommandException;
 
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Main {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LoginCommandException {
 
         while (true) {
             System.out.println("******** Register *********");
