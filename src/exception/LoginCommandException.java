@@ -1,6 +1,6 @@
 package exception;
 
-public class LoginCommandException extends Exception{
+public class LoginCommandException extends Exception {
     public LoginCommandException() {
     }
 

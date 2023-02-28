@@ -8,9 +8,9 @@ import java.util.List;
 
 public class UserContainer {
 
-    private static final List<User> users = new ArrayList();
+    private static final List<User> users = new ArrayList<>();
 
-    public static final List<User> getUsers() {
+    public static List<User> getUsers() {
         return users;
     }
 
