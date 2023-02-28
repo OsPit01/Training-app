@@ -1,3 +1,11 @@
+import command.ExitCommand;
+import command.LoginCommand;
+import command.PrintUsersCommand;
+import command.RegisterCommand;
+import command.constant.CommandConstants;
+import container.UserContainer;
+import exception.LoginCommandException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -19,7 +27,11 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputUsername, inputPassword);
+                    try {
+                        loginCommand.execute(inputUsername, inputPassword);
+                    } catch (LoginCommandException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
 
                 case CommandConstants.REGISTER_CODE:

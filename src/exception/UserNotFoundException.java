@@ -1,3 +1,5 @@
+package exception;
+
 public class UserNotFoundException extends Exception {
 
     public UserNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {

@@ -1,20 +1,12 @@
+package container;
+
+import exception.UserNotFoundException;
+import model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserContainer {
-    public static void main(String[] args) throws UserNotFoundException {
-        User user = new User("igor", "igor_osipov", "ihar", "osipov");
-        User user2 = new User("vlad", "vlad_osipov", "vladislav", "osipov");
-        User user3 = new User("filips", "filips_password", "filip", "filipovich");
-        save(user);
-        save(user2);
-        save(user3);
-        System.out.println(UserContainer.isUserNameAndPasswordExists(user.getUsername(), user.getPassword()));
-        System.out.println(UserContainer.isUserNameAndPasswordExists(user2.getUsername(), user2.getPassword()));
-        System.out.println(UserContainer.isUserNameAndPasswordExists(user3.getUsername(), user.getPassword()));
-
-    }
-
 
     private static final List<User> users = new ArrayList();
 

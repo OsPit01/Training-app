@@ -1,3 +1,5 @@
+package command.constant;
+
 public interface CommandConstants {
     int LOGIN_CODE = 1;
     int REGISTER_CODE = 2;
