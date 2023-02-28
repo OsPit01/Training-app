@@ -1,9 +1,17 @@
+import command.ExitCommand;
+import command.LoginCommand;
+import command.PrintUsersCommand;
+import command.RegisterCommand;
+import command.constant.CommandConstants;
+import container.UserContainer;
+
 import java.util.Scanner;
 
 public class Main {
-    private final static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws Exception {
 
         while (true) {
             System.out.println("******** Register *********");
@@ -13,22 +21,29 @@ public class Main {
 
             switch (choice) {
                 case CommandConstants.LOGIN_CODE:
-                    System.out.println("Your name");
-                    String inputName = scanner.nextLine();
+                    System.out.println("Your username");
+                    String inputUsername = scanner.nextLine();
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputName, inputPassword);
+                    loginCommand.execute(inputUsername, inputPassword);
                     break;
 
                 case CommandConstants.REGISTER_CODE:
-                    System.out.println("Create your account \n");
-                    System.out.println("Your name");
+                    System.out.println("Create your account");
+                    System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
+                    if (UserContainer.getUsers().toString().contains(createUserName)) {
+                        System.out.println("such a user exist already");
+                        return;
+                    }
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
-                    RegisterCommand registerCommand = new RegisterCommand();
-                    registerCommand.register(createUserName, createPassword);
+                    System.out.println("\ninput your name");
+                    String name = scanner.nextLine();
+                    System.out.println("\ninput your surname");
+                    String surname = scanner.nextLine();
+                    new RegisterCommand().register(createUserName, createPassword, name, surname);
                     break;
 
                 case CommandConstants.EXIT_CODE:
