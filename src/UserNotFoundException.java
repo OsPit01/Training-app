@@ -18,4 +18,7 @@ public class UserNotFoundException extends Exception {
 
     public UserNotFoundException() {
     }
+
+    public void getCause(String s) {
+    }
 }
