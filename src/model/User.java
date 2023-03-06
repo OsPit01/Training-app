@@ -31,7 +31,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "model.User:" + " " + username + " " +
+        return "User:" + " " + username + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + "\n";

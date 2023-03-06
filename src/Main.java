@@ -4,14 +4,17 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
+import file.UserToRead;
 
 import java.util.Scanner;
 
 public class Main {
 
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
+        new UserToRead().readUserFromFile();
 
         while (true) {
             System.out.println("******** Register *********");
