@@ -7,13 +7,11 @@ import java.io.IOException;
 
 public class ExitCommand {
 
+    public void exit() throws IOException {
 
-    public void exit()  {
-        try {
-            new UserToFileWriter().write(UserContainer.getUsers());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        UserToFileWriter userToFileWriter = new UserToFileWriter();
+        userToFileWriter.write(UserContainer.getUsers());
+
         System.exit(0);
     }
 }

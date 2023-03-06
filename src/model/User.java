@@ -1,10 +1,10 @@
 package model;
 
 public class User {
-    private String username;
-    private String password;
-    private String name;
-    private String surname;
+    private final String username;
+    private final String password;
+    private final String name;
+    private final String surname;
 
     public User(String login, String password, String name, String surname) {
         this.username = login;
@@ -34,6 +34,6 @@ public class User {
         return "User:" + " " + username + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
-                "surname:" + " " + surname + "\n";
+                "surname:" + " " + surname;
     }
 }

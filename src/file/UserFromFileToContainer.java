@@ -1,17 +1,18 @@
-package converter;
+package file;
 
 import container.UserContainer;
 import model.User;
 
-public class StringToUserConverterSaveContainer {
+public class UserFromFileToContainer {
 
-    public void convert(String line) {
+    public void transferToFile(String line) {
         try {
             String[] words = line.split(" ");
             User user = new User(words[0], words[1], words[2], words[3]);
             UserContainer.save(user);
         } catch (NullPointerException e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 }
+
