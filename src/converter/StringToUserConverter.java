@@ -2,8 +2,7 @@ package converter;
 
 import model.User;
 
-public class StringToUserConverter {
-    private static final String USER_FIELDS_SEPARATOR = " ";
+public class StringToUserConverter implements ConverterConstants {
 
     public User convert(String line) {
         if (line != null) {
@@ -11,7 +10,7 @@ public class StringToUserConverter {
             User user = new User(words[0], words[1], words[2], words[3]);
             return user;
         } else {
-            return new User("noLogin", "noPassword", "noName", "noSurname");
+            return null;
         }
     }
 }

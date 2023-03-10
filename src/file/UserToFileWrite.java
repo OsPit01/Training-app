@@ -4,6 +4,7 @@ import converter.UserToStringConverter;
 import exception.FileWriteException;
 import model.User;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,15 +12,15 @@ public class UserToFileWrite {
 
     private static final String FILE_NAME = "Information_about_users";
     private final UserToStringConverter userToStringConverter;
-    private final java.io.FileWriter writer;
-    private final String LINE_WRAPPING = "\n";
+    private final FileWriter writer;
+    private static final String LINE_WRAPPING = "\n";
 
     public UserToFileWrite() {
         userToStringConverter = new UserToStringConverter();
         try {
-            writer = new java.io.FileWriter(FILE_NAME, true);
+            writer = new java.io.FileWriter(FILE_NAME);
         } catch (IOException e) {
-            throw new FileWriteException(e);
+            throw new FileWriteException("File not found for write");
         }
     }
 
@@ -33,7 +34,7 @@ public class UserToFileWrite {
             try {
                 writer.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new FileWriteException(e + "Exception in UserToFileWriter --> write");
             }
         }
     }
@@ -41,16 +42,16 @@ public class UserToFileWrite {
     public void write(List<User> users) {
         try {
             for (User user : users) {
-                String usersString = userToStringConverter.convert(user);
-                writer.write(usersString + LINE_WRAPPING);
+                String userString = userToStringConverter.convert(user);
+                writer.write(userString + LINE_WRAPPING);
             }
         } catch (IOException e) {
-            throw new FileWriteException(e);
+            throw new FileWriteException(e + "Exception in UserToFileWriter --> write");
         } finally {
             try {
                 writer.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new FileWriteException(e);
             }
         }
     }

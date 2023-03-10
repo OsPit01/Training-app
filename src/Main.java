@@ -5,15 +5,22 @@ import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
+import model.User;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
+    public void init() {
+        UserFromFileReader fileReader = new UserFromFileReader();
+    }
+
     public static void main(String[] args) throws Exception {
-         UserFromFileReader fileReader = new UserFromFileReader();
-         UserContainer.saveAll(fileReader.read());
+        UserFromFileReader fileReader = new UserFromFileReader();
+        List<User> fileUsers = fileReader.read();
+        UserContainer.saveAll(fileUsers);
 
         while (true) {
             System.out.println("******** Register *********");
