@@ -4,19 +4,23 @@ import converter.UserToStringConverter;
 import exception.FileWriteException;
 import model.User;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class UserToFileWriter {
+public class UserToFileWrite {
 
     private static final String FILE_NAME = "Information_about_users";
     private final UserToStringConverter userToStringConverter;
-    private final FileWriter writer;
+    private final java.io.FileWriter writer;
+    private final String LINE_WRAPPING = "\n";
 
-    public UserToFileWriter() throws IOException {
+    public UserToFileWrite() {
         userToStringConverter = new UserToStringConverter();
-        writer = new FileWriter(FILE_NAME, true);
+        try {
+            writer = new java.io.FileWriter(FILE_NAME, true);
+        } catch (IOException e) {
+            throw new FileWriteException(e);
+        }
     }
 
     public void write(User user) {
@@ -38,7 +42,7 @@ public class UserToFileWriter {
         try {
             for (User user : users) {
                 String usersString = userToStringConverter.convert(user);
-                writer.write(usersString);
+                writer.write(usersString + LINE_WRAPPING);
             }
         } catch (IOException e) {
             throw new FileWriteException(e);
@@ -46,7 +50,7 @@ public class UserToFileWriter {
             try {
                 writer.close();
             } catch (IOException e) {
-               throw new RuntimeException(e);
+                throw new RuntimeException(e);
             }
         }
     }

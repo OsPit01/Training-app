@@ -4,7 +4,7 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
-import file.Reader;
+import file.UserFromFileReader;
 
 import java.util.Scanner;
 
@@ -12,7 +12,8 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        new Reader().readFromFile();
+         UserFromFileReader fileReader = new UserFromFileReader();
+         UserContainer.saveAll(fileReader.read());
 
         while (true) {
             System.out.println("******** Register *********");

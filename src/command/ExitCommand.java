@@ -1,15 +1,11 @@
 package command;
 
 import container.UserContainer;
-import file.UserToFileWriter;
-
-import java.io.IOException;
+import file.UserToFileWrite;
 
 public class ExitCommand {
-
-    public void exit() throws IOException {
-
-        UserToFileWriter userToFileWriter = new UserToFileWriter();
+    public void exit() {
+        UserToFileWrite userToFileWriter = new UserToFileWrite();
         userToFileWriter.write(UserContainer.getUsers());
 
         System.exit(0);
