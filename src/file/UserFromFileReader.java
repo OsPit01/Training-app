@@ -1,7 +1,7 @@
 package file;
 
 import converter.StringToUserConverter;
-import exception.FileWriteException;
+import exception.FileReaderException;
 import model.User;
 
 import java.io.File;
@@ -11,17 +11,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserFromFileReader {
-    private final StringToUserConverter converter = new StringToUserConverter();
     private static final String FILE_NAME = "Information_about_users";
     private final File file;
     private final Scanner scanner;
+    private final StringToUserConverter converter = new StringToUserConverter();
 
     public UserFromFileReader() {
         file = new File(FILE_NAME);
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new FileWriteException("File not found for read");
+            throw new FileReaderException("File not found for read");
         }
     }
 

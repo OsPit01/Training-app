@@ -11,9 +11,9 @@ import java.util.List;
 public class UserToFileWrite {
 
     private static final String FILE_NAME = "Information_about_users";
+    private static final String LINE_WRAPPING = "\n";
     private final UserToStringConverter userToStringConverter;
     private final FileWriter writer;
-    private static final String LINE_WRAPPING = "\n";
 
     public UserToFileWrite() {
         userToStringConverter = new UserToStringConverter();

@@ -15,12 +15,12 @@ public class Main {
 
     public void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
+        List<User> fileUsers = fileReader.read();
+        UserContainer.saveAll(fileUsers);
     }
 
     public static void main(String[] args) throws Exception {
-        UserFromFileReader fileReader = new UserFromFileReader();
-        List<User> fileUsers = fileReader.read();
-        UserContainer.saveAll(fileUsers);
+        new Main().init();
 
         while (true) {
             System.out.println("******** Register *********");

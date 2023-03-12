@@ -4,7 +4,8 @@ import model.User;
 
 import java.util.StringJoiner;
 
-public class UserToStringConverter implements ConverterConstants {
+public class UserToStringConverter {
+    public String USER_FIELDS_SEPARATOR = ConverterConstants.USER_FIELDS_SEPARATOR;
 
     public String convert(User user) {
         StringJoiner joiner = new StringJoiner(USER_FIELDS_SEPARATOR);
