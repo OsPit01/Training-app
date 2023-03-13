@@ -4,14 +4,23 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
+import file.UserFromFileReader;
+import model.User;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     private static final Scanner scanner = new Scanner(System.in);
 
+    public static void init() {
+        UserFromFileReader fileReader = new UserFromFileReader();
+        List<User> fileUsers = fileReader.read();
+        UserContainer.saveAll(fileUsers);
+    }
+
     public static void main(String[] args) throws Exception {
+        init();
 
         while (true) {
             System.out.println("******** Register *********");

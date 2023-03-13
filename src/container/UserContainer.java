@@ -18,6 +18,12 @@ public class UserContainer {
         users.add(user);
     }
 
+    public static void saveAll(List<User> inputUsers) {
+        for (User user : inputUsers) {
+            users.add(user);
+        }
+    }
+
     public static boolean isUserNameAndPasswordExists(String userName, String password) throws UserNotFoundException {
         boolean existUser = false;
         User foundUser;
