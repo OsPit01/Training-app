@@ -13,14 +13,14 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public void init() {
+    public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
-        UserContainer.saveAll(fileUsers);
+        UserContainer.saveUsers(fileUsers);
     }
 
     public static void main(String[] args) throws Exception {
-        new Main().init();
+      init();
 
         while (true) {
             System.out.println("******** Register *********");

@@ -18,7 +18,7 @@ public class UserContainer {
         users.add(user);
     }
 
-    public static void saveAll(List<User> listUsers) {
+    public static void saveUsers(List<User> listUsers) {
         for (User user : listUsers) {
             users.add(user);
         }

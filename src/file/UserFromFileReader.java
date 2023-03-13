@@ -12,12 +12,12 @@ import java.util.Scanner;
 
 public class UserFromFileReader {
     private static final String FILE_NAME = "Information_about_users";
-    private final File file;
     private final Scanner scanner;
-    private final StringToUserConverter converter = new StringToUserConverter();
+    private final StringToUserConverter converter;
 
     public UserFromFileReader() {
-        file = new File(FILE_NAME);
+        converter = new StringToUserConverter();
+        File file = new File(FILE_NAME);
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
