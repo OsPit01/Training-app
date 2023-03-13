@@ -1,7 +1,5 @@
 package exception;
 
-import java.io.FileNotFoundException;
-
 public class FileReaderException extends RuntimeException {
 
     public FileReaderException() {

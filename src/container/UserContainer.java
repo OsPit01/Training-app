@@ -18,8 +18,8 @@ public class UserContainer {
         users.add(user);
     }
 
-    public static void saveUsers(List<User> listUsers) {
-        for (User user : listUsers) {
+    public static void saveAll(List<User> inputUsers) {
+        for (User user : inputUsers) {
             users.add(user);
         }
     }

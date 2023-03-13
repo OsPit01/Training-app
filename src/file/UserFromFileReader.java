@@ -17,9 +17,8 @@ public class UserFromFileReader {
 
     public UserFromFileReader() {
         converter = new StringToUserConverter();
-        File file = new File(FILE_NAME);
         try {
-            scanner = new Scanner(file);
+            scanner = new Scanner(new File(FILE_NAME));
         } catch (FileNotFoundException e) {
             throw new FileReaderException("File not found for read");
         }

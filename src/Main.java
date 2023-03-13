@@ -16,11 +16,11 @@ public class Main {
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
-        UserContainer.saveUsers(fileUsers);
+        UserContainer.saveAll(fileUsers);
     }
 
     public static void main(String[] args) throws Exception {
-      init();
+        init();
 
         while (true) {
             System.out.println("******** Register *********");

@@ -11,7 +11,7 @@ import java.util.List;
 public class UserToFileWriter {
 
     private static final String FILE_NAME = "Information_about_users";
-    private static final String LINE_WRAPPING = "\n";
+    private static final String LINE_SEPARATOR = "\n";
     private final UserToStringConverter userToStringConverter;
     private final FileWriter writer;
 
@@ -43,7 +43,7 @@ public class UserToFileWriter {
         try {
             for (User user : users) {
                 String userString = userToStringConverter.convert(user);
-                writer.write(userString + LINE_WRAPPING);
+                writer.write(userString + LINE_SEPARATOR);
             }
         } catch (IOException e) {
             throw new FileWriterException(e + "Exception in UserToFileWriter --> write");
