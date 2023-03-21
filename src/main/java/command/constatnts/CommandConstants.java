@@ -1,4 +1,4 @@
-package command.constant;
+package command.constatnts;
 
 public interface CommandConstants {
     int LOGIN_CODE = 1;
