@@ -9,21 +9,21 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserToStringConverterTest {
 
-    final UserToStringConverter userToStringConverter = new UserToStringConverter();
+    private final UserToStringConverter userToStringConverter = new UserToStringConverter();
 
-    /*  @Test
-  public void createdUser() {
-User user = new User("igor","igor_password","ihar","osipov");
-User newUser = Mockito.mock(User.class);
-assertEquals("ihar",newUser.getSurname());
-   }
-*/
+    @Test(expected = IllegalArgumentException.class)
+    public void testConvertNull() {
+        userToStringConverter.convert(null);
+    }
+
     @Test
     public void testConvert() {
-        User user = new User("igor", "igor_password", "ihar", "osipov");
-        String actual = userToStringConverter.convert(user);
-        assertNotNull(actual);
         String expected = "igor=igor_password=ihar=osipov";
+        User user = new User("igor", "igor_password", "ihar", "osipov");
+
+        String actual = userToStringConverter.convert(user);
+
+        assertNotNull(actual);
         assertEquals(expected, actual);
     }
 }
