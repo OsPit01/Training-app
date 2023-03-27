@@ -8,11 +8,10 @@ public class UserToStringConverter {
 
     public String convert(User user) {
         if (user == null) {
-            throw new IllegalArgumentException("String = null");
+            throw new IllegalArgumentException("user = null");
         }
-        if(user.getUsername() == null || user.getPassword() == null || user.getName() == null || user.getUsername() == null){
-            throw new IllegalArgumentException("field = null");
-
+        if (user.getUsername() == null || user.getPassword() == null || user.getName() == null || user.getSurname() == null) {
+            throw new IllegalArgumentException(" user fields = null");
         }
         StringJoiner joiner = new StringJoiner(ConverterConstants.USER_FIELDS_SEPARATOR);
         joiner.add(user.getUsername());

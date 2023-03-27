@@ -11,7 +11,7 @@ public class StringToUserConverterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testConvertEmptyString() {
-        stringToUserConverter.convert(" ");
+        stringToUserConverter.convert("");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -26,56 +26,85 @@ public class StringToUserConverterTest {
         stringToUserConverter.convert(null);
     }
 
-
     @Test
-    public void testConvertNameWithUnderSlash() {
-        User expected = stringToUserConverter.convert("Van_Clock_Dimon=dimon=vany=rbIba");
+    public void testConvertNameWithDash() {
+        String expected = "Van-Clock-Dimon";
 
-        String actual = "Van_Clock_Dimon";
-
+        User actual = stringToUserConverter.convert("vany=dimon=Van-Clock-Dimon=rbIba");
 
         assertNotNull(actual);
-        assertEquals("can be:Van_Clock_Dimon", expected.getUsername(), actual);
+        assertEquals("can be:Van-Clock-Dimon", expected, actual.getName());
+    }
+
+    @Test
+    public void testConvertSurnameWithDash() {
+        String expected = "rbIba-gold";
+
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
+
+        assertNotNull(actual);
+        assertEquals("can be:rbIba-gold", expected, actual.getSurname());
+    }
+
+    @Test
+    public void testConvertPasswordWithDash() {
+        String expected = "dimon-maradona";
+
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
+
+        assertNotNull(actual);
+        assertEquals("can be:dimom-maradona", expected, actual.getPassword());
+    }
+
+    @Test
+    public void testConvertUsernameWithDash() {
+        String expected = "vany-kaka";
+
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
+
+        assertNotNull(actual);
+        assertEquals("can be:vany-kaka", expected, actual.getUsername());
     }
 
     @Test
     public void testConvertNameOfThreeWords() {
-        User expected = stringToUserConverter.convert("serega=vany_password=Van Clock Vandam=pushkin");
+        String expected = "Van Clock Vandam";
 
-        String actual = "Van Clock Vandam";
+        User actual = stringToUserConverter.convert("serega=vany_password=Van Clock Vandam=pushkin");
 
         assertNotNull(actual);
-        assertEquals("can be: Van Clock Vandam", expected.getName(), actual);
+        assertEquals("can be: Van Clock Vandam", actual.getName(), expected);
     }
+
 
     @Test
     public void testConvertSurnameOfThreeWords() {
-        User expected = stringToUserConverter.convert("serega three zero=vany clock password=colbasa=Van Clock Vandam");
+        String expected = "Van Clock Vandam";
 
-        String actual = "Van Clock Vandam";
+        User actual = stringToUserConverter.convert("serega three zero=van clock password=colbasa=Van Clock Vandam");
 
         assertNotNull(actual);
-        assertEquals("can be: Van Clock Vandam", expected.getSurname(), actual);
+        assertEquals("can be: Van Clock Vandam", actual.getSurname(), expected);
     }
 
     @Test
     public void testConvertPasswordOfThreeWords() {
-        User expected = stringToUserConverter.convert("serega=vany clock password=Van Clock Vandam=pushkin");
+        String expected = "vany clock password";
 
-        String actual = "vany clock password";
+        User actual = stringToUserConverter.convert("serega=vany clock password=Van Clock Vandam=pushkin");
 
         assertNotNull(actual);
-        assertEquals("can be:vany clock password", expected.getPassword(), actual);
+        assertEquals("can be:vany clock password", actual.getPassword(), expected);
     }
 
     @Test
     public void testConvertUsernameOfThreeWords() {
-        User expected = stringToUserConverter.convert("serega three zero=vany clock password=colbasa=Van Clock Vandam");
+        String expected = "serega three zero";
 
-        String actual = "serega three zero";
+        User actual = stringToUserConverter.convert("serega three zero=vany clock password=colbasa=Van Clock Vandam");
 
         assertNotNull(actual);
-        assertEquals("can be: serega three zero", expected.getUsername(), actual);
+        assertEquals("can be: serega three zero", actual.getUsername(), expected);
     }
 
     @Test
@@ -90,6 +119,4 @@ public class StringToUserConverterTest {
         assertEquals("can be name: igor", expected.getName(), actual.getName());
         assertEquals("can be name: osipov", expected.getSurname(), actual.getSurname());
     }
-
-
 }
