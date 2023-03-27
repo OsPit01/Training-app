@@ -19,6 +19,7 @@ public class Main {
         UserContainer.saveAll(fileUsers);
     }
 
+
     public static void main(String[] args) throws Exception {
         init();
 
