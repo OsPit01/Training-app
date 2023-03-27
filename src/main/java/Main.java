@@ -2,7 +2,7 @@ import command.ExitCommand;
 import command.LoginCommand;
 import command.PrintUsersCommand;
 import command.RegisterCommand;
-import command.constatnt.CommandConstants;
+import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
 import model.User;

@@ -7,7 +7,7 @@ public class StringToUserConverter {
     public User convert(String line) {
 
         if (line == null || line.isBlank()) {
-            throw new IllegalArgumentException("String = null");
+            throw new IllegalArgumentException("String = null or Blank");
         }
 
         String[] fields = line.split(ConverterConstants.USER_FIELDS_SEPARATOR);
