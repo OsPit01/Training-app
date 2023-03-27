@@ -10,6 +10,10 @@ public class UserToStringConverter {
         if (user == null) {
             throw new IllegalArgumentException("String = null");
         }
+        if(user.getUsername() == null || user.getPassword() == null || user.getName() == null || user.getUsername() == null){
+            throw new IllegalArgumentException("field = null");
+
+        }
         StringJoiner joiner = new StringJoiner(ConverterConstants.USER_FIELDS_SEPARATOR);
         joiner.add(user.getUsername());
         joiner.add(user.getPassword());

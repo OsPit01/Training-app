@@ -15,6 +15,11 @@ public class UserToStringConverterTest {
     public void testConvertNull() {
         userToStringConverter.convert(null);
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConvertFieldsNull() {
+        User user = new User(null,null,null,null);
+        userToStringConverter.convert(user);
+    }
 
     @Test
     public void testConvert() {
