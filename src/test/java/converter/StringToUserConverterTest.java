@@ -73,7 +73,7 @@ public class StringToUserConverterTest {
         User actual = stringToUserConverter.convert("serega=vany_password=Van Clock Vandam=pushkin");
 
         assertNotNull(actual);
-        assertEquals("can be: Van Clock Vandam", actual.getName(), expected);
+        assertEquals("can be: Van Clock Vandam",expected,actual.getName());
     }
 
 
@@ -84,7 +84,7 @@ public class StringToUserConverterTest {
         User actual = stringToUserConverter.convert("serega three zero=van clock password=colbasa=Van Clock Vandam");
 
         assertNotNull(actual);
-        assertEquals("can be: Van Clock Vandam", actual.getSurname(), expected);
+        assertEquals("can be: Van Clock Vandam",expected,actual.getSurname());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class StringToUserConverterTest {
         User actual = stringToUserConverter.convert("serega=vany clock password=Van Clock Vandam=pushkin");
 
         assertNotNull(actual);
-        assertEquals("can be:vany clock password", actual.getPassword(), expected);
+        assertEquals("can be:vany clock password",expected,actual.getPassword());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class StringToUserConverterTest {
         User actual = stringToUserConverter.convert("serega three zero=vany clock password=colbasa=Van Clock Vandam");
 
         assertNotNull(actual);
-        assertEquals("can be: serega three zero", actual.getUsername(), expected);
+        assertEquals("can be: serega three zero",expected,actual.getUsername());
     }
 
     @Test
