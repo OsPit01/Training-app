@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class StringToUserConverterTest {
-    final StringToUserConverter stringToUserConverter = new StringToUserConverter();
+    private final StringToUserConverter stringToUserConverter = new StringToUserConverter();
 
     @Test(expected = IllegalArgumentException.class)
     public void testConvertEmptyString() {
@@ -17,6 +17,7 @@ public class StringToUserConverterTest {
     @Test(expected = IllegalArgumentException.class)
     public void testConvertEmptyFields() {
         String actual = "" + " " + "" + " " + "" + "";
+
         stringToUserConverter.convert(actual);
     }
 
