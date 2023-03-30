@@ -30,6 +30,6 @@ public class UserToStringConverterTest {
         String actual = userToStringConverter.convert(user);
 
         assertNotNull(actual);
-        assertEquals("String can be:igor=igor_password=ihar=osipov", expected, actual);
+        assertEquals(expected, actual);
     }
 }

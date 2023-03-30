@@ -6,12 +6,12 @@ import model.UserValidator;
 import java.util.StringJoiner;
 
 public class UserToStringConverter {
-     private final UserValidator validator = new UserValidator();
+    private final UserValidator validator = new UserValidator();
 
 
     public String convert(User user) {
-        if (!(validator.isValid(user)))  {  //todo move to another laye
-            throw new IllegalArgumentException("user = null");
+        if (!(validator.isValid(user))) {  //todo move to another laye
+            throw new IllegalArgumentException(String.format("Illegal argument user invalid user = [%s]", user.toString()));
         }
 
         StringJoiner joiner = new StringJoiner(ConverterConstants.USER_FIELDS_SEPARATOR);
@@ -21,5 +21,4 @@ public class UserToStringConverter {
         joiner.add(user.getSurname());
         return joiner.toString();
     }
-
 }
