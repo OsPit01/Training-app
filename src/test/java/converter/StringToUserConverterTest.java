@@ -20,8 +20,12 @@ public class StringToUserConverterTest {
     }
 
     @Test
-    public void  testConvertStringWithDash() {
-        User expected = new User("vany-kaka", "dimon-maradona", "Van-Clock-Dimon", "rbIba-gold");
+    public void testConvertStringWithDash() {
+        User expected = new User("vany-kaka",
+                "dimon-maradona",
+                "Van-Clock-Dimon",
+                "rbIba-gold");
+
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
 
         assertNotNull(actual);
@@ -32,9 +36,14 @@ public class StringToUserConverterTest {
     }
 
     @Test
-    public void testConvertUserOfThreeWords() {
-        User expected = new User("serega three zero", "vany short boy", "Van Clock Vandam", "pushkin aleksandr lol");
-        User actual = stringToUserConverter.convert("serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol");
+    public void testConvertStringOfThreeWords() {
+        User expected = new User("serega three zero",
+                "vany short boy",
+                "Van Clock Vandam",
+                "pushkin aleksandr lol");
+
+        User actual = stringToUserConverter.convert(
+                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol");
 
         assertNotNull(actual);
         assertEquals(expected.getName(), actual.getName());
@@ -46,6 +55,7 @@ public class StringToUserConverterTest {
     @Test
     public void testConvert() {
         User expected = new User("Oss", "oss_password", "igor", "osipov");
+
         User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov");
 
         assertNotNull(actual);

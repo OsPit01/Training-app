@@ -8,7 +8,7 @@ public class StringToUserConverter {
 
         if (line == null || line.isBlank()) {
 
-            throw new IllegalArgumentException(String.format("Illegal argument line = [%s]",line));
+            throw new IllegalArgumentException(String.format("Illegal argument line = [%s]", line));
         }
 
         String[] fields = line.split(ConverterConstants.USER_FIELDS_SEPARATOR);
