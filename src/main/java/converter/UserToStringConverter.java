@@ -11,7 +11,7 @@ public class UserToStringConverter {
 
     public String convert(User user) {
         if (!(validator.isValid(user))) {  //todo move to another laye
-            throw new IllegalArgumentException(String.format("Illegal argument user invalid user = [%s]", user.toString()));
+            throw new IllegalArgumentException(String.format("invalid user = [%s]", user));
         }
 
         StringJoiner joiner = new StringJoiner(ConverterConstants.USER_FIELDS_SEPARATOR);
