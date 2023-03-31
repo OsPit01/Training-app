@@ -13,6 +13,10 @@ public class StringToUserConverterTest {
     public void testConvertEmptyString() {
         stringToUserConverter.convert("");
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void testConvertBlankString() {
+        stringToUserConverter.convert(" ");
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConvertNullString() {
@@ -21,10 +25,12 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvertStringWithDash() {
-        User expected = new User("vany-kaka",
+        User expected = new User(
+                "vany-kaka",
                 "dimon-maradona",
                 "Van-Clock-Dimon",
-                "rbIba-gold");
+                "rbIba-gold"
+        );
 
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
 
@@ -37,13 +43,16 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvertStringOfThreeWords() {
-        User expected = new User("serega three zero",
+        User expected = new User(
+                "serega three zero",
                 "vany short boy",
                 "Van Clock Vandam",
-                "pushkin aleksandr lol");
+                "pushkin aleksandr lol"
+        );
 
         User actual = stringToUserConverter.convert(
-                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol");
+                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol"
+        );
 
         assertNotNull(actual);
         assertEquals(expected.getName(), actual.getName());
