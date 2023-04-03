@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.core.JsonToken;
 import command.ExitCommand;
 import command.LoginCommand;
 import command.PrintUsersCommand;
@@ -5,6 +6,7 @@ import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
+import model.Trainer;
 import model.User;
 
 import java.util.List;
@@ -54,7 +56,22 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
-                    new RegisterCommand().register(createUserName, createPassword, name, surname);
+                    System.out.println("your role?");
+                    String yourRole = scanner.nextLine();
+                    if(yourRole.equals("admin")) {
+                        continue;
+                    }
+                    if(yourRole.equals("trainer")) {
+                        System.out.println("how old");
+                        String age = scanner.nextLine();
+                        System.out.println("your weight");
+                        String weight = scanner.nextLine();
+                        System.out.println("your height");
+                        String height = scanner.nextLine();
+                        Trainer trainer = new Trainer(age,weight,height);
+                        continue;
+                    }
+                    new RegisterCommand().register(createUserName, createPassword, name, surname,yourRole);
                     break;
 
                 case CommandConstants.EXIT_CODE:
