@@ -13,6 +13,7 @@ public class StringToUserConverterTest {
     public void testConvertEmptyString() {
         stringToUserConverter.convert("");
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void testConvertBlankString() {
         stringToUserConverter.convert(" ");
