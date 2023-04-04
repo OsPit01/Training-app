@@ -5,8 +5,6 @@ import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
-import model.Trainee;
-import model.Trainer;
 import model.User;
 
 import java.util.List;
@@ -56,25 +54,11 @@ public class Main {
                     String surname = scanner.nextLine();
                     System.out.println("your role");
                     String role = scanner.nextLine();
-                    if(role.equals("admin")) {
+                    if (role.equals("admin")) {
                         System.out.println("Welcome");
                     }
-                    if(role.equals("trainer")) {
-                        System.out.println("your age");
-                        String age = scanner.nextLine();
-                        System.out.println("your weight");
-                        String weight = scanner.nextLine();
-                        System.out.println("your height");
-                        String height = scanner.nextLine();
-                        Trainer trainer = new Trainer(age,weight,height);
-                    }
-                    if (role.equals("trainee")) {
-                        System.out.println("your level up");
-                        String lvl = scanner.nextLine();
-                        Trainee trainee = new Trainee(lvl);
 
-                    }
-                    new RegisterCommand().register(createUserName, createPassword, name, surname,role);
+                    new RegisterCommand().register(createUserName, createPassword, name, surname, role);
                     break;
 
                 case CommandConstants.EXIT_CODE:
