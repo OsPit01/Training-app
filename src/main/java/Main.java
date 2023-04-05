@@ -38,6 +38,7 @@ public class Main {
                     loginCommand.execute(inputUsername, inputPassword);
                     break;
 
+
                 case CommandConstants.REGISTER_CODE:
                     System.out.println("Create your account");
                     System.out.println("Your userName");
@@ -54,9 +55,6 @@ public class Main {
                     String surname = scanner.nextLine();
                     System.out.println("your role");
                     String role = scanner.nextLine();
-                    if (role.equals("admin")) {
-                        System.out.println("Welcome");
-                    }
 
                     new RegisterCommand().register(createUserName, createPassword, name, surname, role);
                     break;
@@ -68,8 +66,12 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.printUsers();
-                    break;
+                    String currentRole = UserContainer.findUsersByRole(UserContainer.currentUser);
+                    switch (currentRole) {
+                        case "admin" -> printUsersCommand.printAllUsers();
+                        case "trainer" -> printUsersCommand.printTrainee();
+                        case "trainee" -> printUsersCommand.printTrainer();
+                    }
             }
         }
     }

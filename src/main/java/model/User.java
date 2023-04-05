@@ -41,7 +41,7 @@ public class User {
         return "User:" + " " + username + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
-                "surname:" + " " + surname +
+                "surname:" + " " + surname + " " +
                 "role:" + " " + role;
     }
 }
