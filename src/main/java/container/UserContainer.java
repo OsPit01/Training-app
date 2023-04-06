@@ -10,8 +10,6 @@ public class UserContainer {
 
     private static final List<User> users = new ArrayList<>();
 
-    public static  List<User> currentUser = new ArrayList();
-
     public static List<User> getUsers() {
         return users;
     }
@@ -33,7 +31,7 @@ public class UserContainer {
         for (int i = 0; i < users.size(); i++) {
             foundUser = users.get(i);
             if (foundUser.getUsername().equals(userName) && foundUser.getPassword().equals(password)) {
-                currentUser.add(foundUser);
+                UserSession.currentUser.add(foundUser);
                 existUser = true;
             }
         }
@@ -43,25 +41,21 @@ public class UserContainer {
         return existUser;
     }
 
-
     public static String findUsersByRole(List<User> currentUser) {
         String admin = "admin";
         String trainer = "trainer";
         String trainee = "trainee";
         User user;
-        for(int i = 0; i < currentUser.size(); i++) {
+        for (int i = 0; i < currentUser.size(); i++) {
             user = currentUser.get(i);
 
             if (user.getRole().equals(admin)) {
-                System.out.println("\n" + "you have successfully logged in as admin");
                 return admin;
             }
             if (user.getRole().equals(trainer)) {
-                System.out.println("\n" + "Successful entry");
                 return trainer;
             }
             if (user.getRole().equals(trainee)) {
-                System.out.println("\n" + "Successful entry");
                 return trainee;
 
             }

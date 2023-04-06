@@ -4,6 +4,7 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
+import container.UserSession;
 import file.UserFromFileReader;
 import model.User;
 
@@ -35,9 +36,9 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
+                    UserSession.currentUser.clear();
                     loginCommand.execute(inputUsername, inputPassword);
                     break;
-
 
                 case CommandConstants.REGISTER_CODE:
                     System.out.println("Create your account");
@@ -66,11 +67,16 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    String currentRole = UserContainer.findUsersByRole(UserContainer.currentUser);
+                    String currentRole = UserContainer.findUsersByRole(UserSession.currentUser);
                     switch (currentRole) {
-                        case "admin" -> printUsersCommand.printAllUsers();
-                        case "trainer" -> printUsersCommand.printTrainee();
-                        case "trainee" -> printUsersCommand.printTrainer();
+                        case "admin":
+                            printUsersCommand.printAllUsers();
+                            break;
+                        case "trainer":
+                            printUsersCommand.printTrainee();
+                            break;
+                        case "trainee":
+                            printUsersCommand.printTrainer();
                     }
             }
         }

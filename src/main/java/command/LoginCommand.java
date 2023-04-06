@@ -9,9 +9,7 @@ public class LoginCommand {
 
         try {
             if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
-
                 System.out.println("\n" + "Successful entry");
-
             }
 
         } catch (UserNotFoundException e) {
