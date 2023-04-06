@@ -69,14 +69,9 @@ public class Main {
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
                     String currentRole = UserContainer.findUsersByRole(UserSession.currentUser);
                     switch (currentRole) {
-                        case "admin":
-                            printUsersCommand.printAllUsers();
-                            break;
-                        case "trainer":
-                            printUsersCommand.printTrainee();
-                            break;
-                        case "trainee":
-                            printUsersCommand.printTrainer();
+                        case "admin" -> printUsersCommand.printAllUsers();
+                        case "trainer" -> printUsersCommand.printTrainee();
+                        case "trainee" -> printUsersCommand.printTrainer();
                     }
             }
         }
