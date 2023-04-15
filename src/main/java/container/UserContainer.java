@@ -24,16 +24,21 @@ public class UserContainer {
         }
     }
 
+    public static User findUserByUsernameAndPassword(String userName, String password) {
+
+        for (User user : users) {
+            if (user.getUsername().equals(userName) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public static boolean isUserNameAndPasswordExists(String userName, String password) throws UserNotFoundException {
         boolean existUser = false;
-        User foundUser;
-
-        for (int i = 0; i < users.size(); i++) {
-            foundUser = users.get(i);
-            if (foundUser.getUsername().equals(userName) && foundUser.getPassword().equals(password)) {
-                UserSession.currentUser.add(foundUser);
-                existUser = true;
-            }
+        User foundUser = findUserByUsernameAndPassword(userName, password);
+        if (foundUser != null) {
+            existUser = true;
         }
         if (!existUser) {
             throw new UserNotFoundException("such username or password does not exist");
@@ -41,25 +46,14 @@ public class UserContainer {
         return existUser;
     }
 
-    public static String findUsersByRole(List<User> currentUser) {
-        String admin = "admin";
-        String trainer = "trainer";
-        String trainee = "trainee";
-        User user;
-        for (int i = 0; i < currentUser.size(); i++) {
-            user = currentUser.get(i);
+    public static List<User> findUsersByRole(List<String> roles) {
+        List<User> result = new ArrayList<>();
 
-            if (user.getRole().equals(admin)) {
-                return admin;
-            }
-            if (user.getRole().equals(trainer)) {
-                return trainer;
-            }
-            if (user.getRole().equals(trainee)) {
-                return trainee;
-
+        for (User user : users) {
+            if (roles.contains(user.getRole())) {
+                result.add(user);
             }
         }
-        return "visitor";
+        return result;
     }
 }

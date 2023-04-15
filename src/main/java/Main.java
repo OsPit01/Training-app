@@ -36,8 +36,8 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    UserSession.currentUser.clear();
                     loginCommand.execute(inputUsername, inputPassword);
+
                     break;
 
                 case CommandConstants.REGISTER_CODE:
@@ -55,9 +55,9 @@ public class Main {
                     System.out.println("\ninput your surname");
                     String surname = scanner.nextLine();
                     System.out.println("your role");
-                    String role = scanner.nextLine();
+                    String inputRole = scanner.nextLine();
 
-                    new RegisterCommand().register(createUserName, createPassword, name, surname, role);
+                    new RegisterCommand().register(createUserName, createPassword, name, surname, inputRole);
                     break;
 
                 case CommandConstants.EXIT_CODE:
@@ -67,11 +67,18 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    String currentRole = UserContainer.findUsersByRole(UserSession.currentUser);
-                    switch (currentRole) {
-                        case "admin" -> printUsersCommand.printAllUsers();
-                        case "trainer" -> printUsersCommand.printTrainee();
-                        case "trainee" -> printUsersCommand.printTrainer();
+                    String role = UserSession.currentUser.getRole();
+                    if (role.equals("admin")) {
+                        List<User> usersByRole = UserContainer.findUsersByRole(List.of("admin", "trainer", "trainee"));
+                        printUsersCommand.printUsers(usersByRole);
+                    }
+                    if (role.equals("trainer")) {
+                        List<User> userByRole = UserContainer.findUsersByRole(List.of("trainee"));
+                        printUsersCommand.printUsers(userByRole);
+                    }
+                    if (role.equals("trainee")) {
+                        List<User> userByRole = UserContainer.findUsersByRole(List.of("trainer"));
+                        printUsersCommand.printUsers(userByRole);
                     }
             }
         }

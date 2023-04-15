@@ -1,6 +1,7 @@
 package command;
 
 import container.UserContainer;
+import container.UserSession;
 import exception.LoginCommandException;
 import exception.UserNotFoundException;
 
@@ -10,6 +11,7 @@ public class LoginCommand {
         try {
             if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
                 System.out.println("\n" + "Successful entry");
+                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
             }
 
         } catch (UserNotFoundException e) {
