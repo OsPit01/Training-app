@@ -4,7 +4,6 @@ import command.PrintUsersCommand;
 import command.RegisterCommand;
 import command.constant.CommandConstants;
 import container.UserContainer;
-import container.UserSession;
 import file.UserFromFileReader;
 import model.User;
 
@@ -51,13 +50,13 @@ public class Main {
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     System.out.println("\ninput your name");
-                    String name = scanner.nextLine();
+                    String createName = scanner.nextLine();
                     System.out.println("\ninput your surname");
-                    String surname = scanner.nextLine();
+                    String createSurname = scanner.nextLine();
                     System.out.println("your role");
-                    String inputRole = scanner.nextLine();
+                    String createRole = scanner.nextLine();
 
-                    new RegisterCommand().register(createUserName, createPassword, name, surname, inputRole);
+                    new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
                     break;
 
                 case CommandConstants.EXIT_CODE:
@@ -67,19 +66,7 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    String role = UserSession.currentUser.getRole();
-                    if (role.equals("admin")) {
-                        List<User> usersByRole = UserContainer.findUsersByRole(List.of("admin", "trainer", "trainee"));
-                        printUsersCommand.printUsers(usersByRole);
-                    }
-                    if (role.equals("trainer")) {
-                        List<User> userByRole = UserContainer.findUsersByRole(List.of("trainee"));
-                        printUsersCommand.printUsers(userByRole);
-                    }
-                    if (role.equals("trainee")) {
-                        List<User> userByRole = UserContainer.findUsersByRole(List.of("trainer"));
-                        printUsersCommand.printUsers(userByRole);
-                    }
+                    printUsersCommand.printUsersRole();
             }
         }
     }
