@@ -5,7 +5,6 @@ public class User {
     private final String password;
     private final String name;
     private final String surname;
-
     private final String role;
 
     public User(String login, String password, String name, String surname, String role) {

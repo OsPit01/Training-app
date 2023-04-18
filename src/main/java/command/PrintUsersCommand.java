@@ -11,41 +11,36 @@ import model.UserRole;
 import java.util.List;
 
 public class PrintUsersCommand {
-    public ObjectMapper objectMapper = new ObjectMapper();
+    public final ObjectMapper objectMapper = new ObjectMapper();
 
-    public void printFormatUsersToJson(List<User> user) throws JsonProcessingException {
-        String result = objectMapper.writeValueAsString(user);
+    public void printFormatUsersToJson(List<User> user) {
+        String result = null;
+        try {
+            result = objectMapper.writeValueAsString(user);
+        } catch (JsonProcessingException e) {
+            throw new JsonException(e);
+        }
         System.out.println(result);
     }
 
-    public void printUsersRole() {
+    public void print() {
         String role = UserSession.currentUser.getRole();
-        UserRole userRoleAdmin = UserRole.admin;
-        UserRole userRoleTrainer = UserRole.trainer;
+        UserRole userRoleAdmin = UserRole.ADMIN;
+        UserRole userRoleTrainer = UserRole.TRAINER;
+        UserRole userRoleTrainee = UserRole.TRAINEE;
 
-        if (role.equals(userRoleAdmin.toString())) {
+        if (role.equalsIgnoreCase(userRoleAdmin.toString())) {
             List<User> usersByRole = UserContainer.findUsersByRole(List.of("admin", "trainer", "trainee"));
-            try {
-                printFormatUsersToJson(usersByRole);
-            } catch (JsonProcessingException e) {
-                throw new JsonException(e);
-            }
+            printFormatUsersToJson(usersByRole);
         }
 
-        if (role.equals(userRoleTrainer.toString())) {
+        if (role.equalsIgnoreCase(userRoleTrainer.toString())) {
             List<User> userByRole = UserContainer.findUsersByRole(List.of("trainee"));
-            try {
-                printFormatUsersToJson(userByRole);
-            } catch (JsonProcessingException e) {
-                throw new JsonException(e);
-            }
-        } else {
+            printFormatUsersToJson(userByRole);
+        }
+        if (role.equalsIgnoreCase(userRoleTrainee.toString())) {
             List<User> userByRole = UserContainer.findUsersByRole(List.of("trainer"));
-            try {
-                printFormatUsersToJson(userByRole);
-            } catch (JsonProcessingException e) {
-                throw new JsonException(e);
-            }
+            printFormatUsersToJson(userByRole);
         }
     }
 }

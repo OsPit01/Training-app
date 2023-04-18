@@ -36,7 +36,6 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputUsername, inputPassword);
-
                     break;
 
                 case CommandConstants.REGISTER_CODE:
@@ -66,7 +65,8 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.printUsersRole();
+                    printUsersCommand.print();
+                    break;
             }
         }
     }
