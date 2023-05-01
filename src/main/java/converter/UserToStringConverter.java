@@ -1,6 +1,7 @@
 package converter;
 
 import model.User;
+import model.UserRole;
 import model.UserValidator;
 
 import java.util.StringJoiner;
@@ -19,7 +20,7 @@ public class UserToStringConverter {
         joiner.add(user.getPassword());
         joiner.add(user.getName());
         joiner.add(user.getSurname());
-        joiner.add(user.getRole());
+        joiner.add(user.getRole().toString());
         return joiner.toString();
     }
 }

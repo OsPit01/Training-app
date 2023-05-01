@@ -11,7 +11,7 @@ import model.UserRole;
 import java.util.List;
 
 public class PrintUsersCommand {
-    public final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void printFormatUsersToJson(List<User> user) {
         String result = null;
@@ -29,16 +29,16 @@ public class PrintUsersCommand {
         UserRole userRoleTrainer = UserRole.TRAINER;
         UserRole userRoleTrainee = UserRole.TRAINEE;
 
-        if (role.equalsIgnoreCase(userRoleAdmin.toString())) {
-            List<User> usersByRole = UserContainer.findUsersByRole(List.of("admin", "trainer", "trainee"));
+        if (role.equals(userRoleAdmin)) {
+            List<User> usersByRole = UserContainer.findUsersByRole(List.of(userRoleAdmin.toString()));
             printFormatUsersToJson(usersByRole);
         }
 
-        if (role.equalsIgnoreCase(userRoleTrainer.toString())) {
+        if (role.equals(userRoleTrainer)) {
             List<User> userByRole = UserContainer.findUsersByRole(List.of("trainee"));
             printFormatUsersToJson(userByRole);
         }
-        if (role.equalsIgnoreCase(userRoleTrainee.toString())) {
+        if (role.equals(userRoleTrainee)) {
             List<User> userByRole = UserContainer.findUsersByRole(List.of("trainer"));
             printFormatUsersToJson(userByRole);
         }

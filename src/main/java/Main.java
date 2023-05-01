@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
@@ -54,7 +53,6 @@ public class Main {
                     String createSurname = scanner.nextLine();
                     System.out.println("your role");
                     String createRole = scanner.nextLine();
-
                     new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
                     break;
 

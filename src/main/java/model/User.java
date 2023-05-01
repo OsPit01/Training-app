@@ -5,9 +5,10 @@ public class User {
     private final String password;
     private final String name;
     private final String surname;
-    private final String role;
 
-    public User(String login, String password, String name, String surname, String role) {
+    private final UserRole role;
+
+    public User(String login, String password, String name, String surname, UserRole role) {
         this.username = login;
         this.password = password;
         this.name = name;
@@ -31,7 +32,7 @@ public class User {
         return surname;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
