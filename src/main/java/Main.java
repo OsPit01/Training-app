@@ -6,12 +6,14 @@ import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
 import model.User;
+import model.UserRole;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
@@ -52,7 +54,7 @@ public class Main {
                     System.out.println("\ninput your surname");
                     String createSurname = scanner.nextLine();
                     System.out.println("your role");
-                    String createRole = scanner.nextLine();
+                    UserRole createRole = UserRole.valueOf(scanner.nextLine().toUpperCase());
                     new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
                     break;
 

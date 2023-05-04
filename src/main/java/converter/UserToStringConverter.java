@@ -1,14 +1,12 @@
 package converter;
 
 import model.User;
-import model.UserRole;
 import model.UserValidator;
 
 import java.util.StringJoiner;
 
 public class UserToStringConverter {
     private final UserValidator validator = new UserValidator();
-
 
     public String convert(User user) {
         if (!(validator.isValid(user))) {  //todo move to another laye

@@ -1,6 +1,7 @@
 package converter;
 
 import model.User;
+import model.UserRole;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,8 +25,8 @@ public class UserToStringConverterTest {
 
     @Test
     public void testConvert() {
-        String expected = "igor=igor_password=ihar=osipov=admin";
-        User user = new User("igor", "igor_password", "ihar", "osipov","admin");
+        String expected = "igor=igor_password=ihar=osipov=ADMIN";
+        User user = new User("igor", "igor_password", "ihar", "osipov", UserRole.ADMIN);
 
         String actual = userToStringConverter.convert(user);
 

@@ -1,6 +1,7 @@
 package converter;
 
 import model.User;
+import model.UserRole;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,7 @@ public class StringToUserConverterTest {
                 "dimon-maradona",
                 "Van-Clock-Dimon",
                 "rbIba-gold",
-                "admin"
+                UserRole.ADMIN
         );
 
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin");
@@ -49,7 +50,7 @@ public class StringToUserConverterTest {
                 "vany short boy",
                 "Van Clock Vandam",
                 "pushkin aleksandr lol",
-                "admin"
+                UserRole.ADMIN
         );
 
         User actual = stringToUserConverter.convert(
@@ -65,7 +66,7 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvert() {
-        User expected = new User("Oss", "oss_password", "igor", "osipov","admin");
+        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN);
 
         User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin");
 

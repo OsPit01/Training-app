@@ -2,6 +2,7 @@ package container;
 
 import exception.UserNotFoundException;
 import model.User;
+import model.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,7 @@ public class UserContainer {
     }
 
     public static void saveAll(List<User> inputUsers) {
-        for (User user : inputUsers) {
-            users.add(user);
-        }
+        users.addAll(inputUsers);
     }
 
     public static User findUserByUsernameAndPassword(String userName, String password) {
@@ -46,7 +45,7 @@ public class UserContainer {
         return existUser;
     }
 
-    public static List<User> findUsersByRole(List<String> roles) {
+    public static List<User> findUsersByRole(List<UserRole> roles) {
         List<User> result = new ArrayList<>();
 
         for (User user : users) {

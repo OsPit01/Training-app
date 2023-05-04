@@ -14,7 +14,7 @@ public class PrintUsersCommand {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void printFormatUsersToJson(List<User> user) {
-        String result = null;
+        String result;
         try {
             result = objectMapper.writeValueAsString(user);
         } catch (JsonProcessingException e) {
@@ -24,23 +24,22 @@ public class PrintUsersCommand {
     }
 
     public void print() {
-        String role = UserSession.currentUser.getRole();
-        UserRole userRoleAdmin = UserRole.ADMIN;
-        UserRole userRoleTrainer = UserRole.TRAINER;
-        UserRole userRoleTrainee = UserRole.TRAINEE;
+        UserRole enumRole = UserSession.currentUser.getRole();
+        List<User> usersByRole;
 
-        if (role.equals(userRoleAdmin)) {
-            List<User> usersByRole = UserContainer.findUsersByRole(List.of(userRoleAdmin.toString()));
-            printFormatUsersToJson(usersByRole);
-        }
-
-        if (role.equals(userRoleTrainer)) {
-            List<User> userByRole = UserContainer.findUsersByRole(List.of("trainee"));
-            printFormatUsersToJson(userByRole);
-        }
-        if (role.equals(userRoleTrainee)) {
-            List<User> userByRole = UserContainer.findUsersByRole(List.of("trainer"));
-            printFormatUsersToJson(userByRole);
+        switch (enumRole) {
+            case ADMIN -> {
+                usersByRole = UserContainer.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
+                printFormatUsersToJson(usersByRole);
+            }
+            case TRAINER -> {
+                usersByRole = UserContainer.findUsersByRole(List.of(UserRole.TRAINEE));
+                printFormatUsersToJson(usersByRole);
+            }
+            case TRAINEE -> {
+                usersByRole = UserContainer.findUsersByRole(List.of(UserRole.TRAINER));
+                printFormatUsersToJson(usersByRole);
+            }
         }
     }
 }

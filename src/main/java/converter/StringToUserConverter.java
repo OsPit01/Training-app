@@ -14,7 +14,9 @@ public class StringToUserConverter {
         }
 
         String[] fields = line.split(ConverterConstants.USER_FIELDS_SEPARATOR);
-        User user = new User(fields[0], fields[1], fields[2], fields[3], UserSession.currentUser.getRole());
+        UserRole enumRole = UserRole.valueOf(fields[4].toUpperCase());
+        User user = new User(fields[0], fields[1], fields[2], fields[3],enumRole);
+
         return user;
     }
 }
