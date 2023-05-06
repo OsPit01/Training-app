@@ -54,7 +54,8 @@ public class Main {
                     System.out.println("\ninput your surname");
                     String createSurname = scanner.nextLine();
                     System.out.println("your role");
-                    UserRole createRole = UserRole.valueOf(scanner.nextLine().toUpperCase());
+                    String inputRole = scanner.nextLine();
+                    UserRole createRole = UserRole.valueOf(inputRole.toUpperCase());
                     new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
                     break;
 

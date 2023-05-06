@@ -15,7 +15,9 @@ public class LoginCommand {
             }
 
         } catch (UserNotFoundException e) {
-            System.out.println("user with login = " + " " + userName + " " + "and password = " + " " + password + " " + "not found in the system");
+            System.out.println("user with login = " + " " +
+                    userName + " " + "and password = " + " " +
+                    password + " " + "not found in the system");
             throw new LoginCommandException("login error", e);
         }
     }
