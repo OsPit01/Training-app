@@ -10,9 +10,14 @@ public class LoginCommand {
 
         try {
             if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
-                System.out.println("\n" + "Successful entry");
                 UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
             }
+            String s = UserSession.currentUser.getBan();
+             if (s.equals("ban")) {
+                  System.out.println("you are blocked");
+                  System.exit(0);
+             }
+                System.out.println("\n" + "Successful entry");
 
         } catch (UserNotFoundException e) {
             System.out.println("user with login = " + " " +
