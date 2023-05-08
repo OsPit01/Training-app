@@ -1,9 +1,7 @@
-import command.ExitCommand;
-import command.LoginCommand;
-import command.PrintUsersCommand;
-import command.RegisterCommand;
+import command.*;
 import command.constant.CommandConstants;
 import container.UserContainer;
+import container.UserSession;
 import file.UserFromFileReader;
 import model.User;
 import model.UserRole;
@@ -37,6 +35,9 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputUsername, inputPassword);
+                    if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
+                        System.out.println("1010. choice user for ban");
+                    }
                     break;
 
                 case CommandConstants.REGISTER_CODE:
@@ -67,6 +68,13 @@ public class Main {
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
                     printUsersCommand.print();
+                    break;
+
+                case CommandConstants.BAN_USERS:
+                    System.out.println("write name of user for ban");
+                    String user =  scanner.nextLine();
+                    BanUsersCommand banUsersCommand = new BanUsersCommand();
+                    banUsersCommand.ban(user);
                     break;
             }
         }
