@@ -1,6 +1,7 @@
 package converter;
 
 import model.User;
+import model.UserRole;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -29,10 +30,11 @@ public class StringToUserConverterTest {
                 "vany-kaka",
                 "dimon-maradona",
                 "Van-Clock-Dimon",
-                "rbIba-gold"
+                "rbIba-gold",
+                UserRole.ADMIN
         );
 
-        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold");
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin");
 
         assertNotNull(actual);
         assertEquals(expected.getName(), actual.getName());
@@ -47,11 +49,12 @@ public class StringToUserConverterTest {
                 "serega three zero",
                 "vany short boy",
                 "Van Clock Vandam",
-                "pushkin aleksandr lol"
+                "pushkin aleksandr lol",
+                UserRole.ADMIN
         );
 
         User actual = stringToUserConverter.convert(
-                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol"
+                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin"
         );
 
         assertNotNull(actual);
@@ -63,14 +66,15 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvert() {
-        User expected = new User("Oss", "oss_password", "igor", "osipov");
+        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN);
 
-        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov");
+        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin");
 
         assertNotNull(actual);
         assertEquals(expected.getUsername(), actual.getUsername());
         assertEquals(expected.getPassword(), actual.getPassword());
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getSurname(), actual.getSurname());
+        assertEquals(expected.getRole(),actual.getRole());
     }
 }

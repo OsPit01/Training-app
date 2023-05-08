@@ -6,6 +6,7 @@ import command.constant.CommandConstants;
 import container.UserContainer;
 import file.UserFromFileReader;
 import model.User;
+import model.UserRole;
 
 import java.util.List;
 import java.util.Scanner;
@@ -49,10 +50,13 @@ public class Main {
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     System.out.println("\ninput your name");
-                    String name = scanner.nextLine();
+                    String createName = scanner.nextLine();
                     System.out.println("\ninput your surname");
-                    String surname = scanner.nextLine();
-                    new RegisterCommand().register(createUserName, createPassword, name, surname);
+                    String createSurname = scanner.nextLine();
+                    System.out.println("your role");
+                    String inputRole = scanner.nextLine();
+                    UserRole createRole = UserRole.valueOf(inputRole.toUpperCase());
+                    new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
                     break;
 
                 case CommandConstants.EXIT_CODE:
@@ -62,7 +66,7 @@ public class Main {
 
                 case CommandConstants.SHOW_ME_LIST_CODE:
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.printUsers();
+                    printUsersCommand.print();
                     break;
             }
         }

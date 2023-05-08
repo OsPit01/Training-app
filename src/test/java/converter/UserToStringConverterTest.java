@@ -1,6 +1,7 @@
 package converter;
 
 import model.User;
+import model.UserRole;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,15 +18,15 @@ public class UserToStringConverterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testConvertFieldsNull() {
-        User user = new User(null, null, null, null);
+        User user = new User(null, null, null, null,null);
 
         userToStringConverter.convert(user);
     }
 
     @Test
     public void testConvert() {
-        String expected = "igor=igor_password=ihar=osipov";
-        User user = new User("igor", "igor_password", "ihar", "osipov");
+        String expected = "igor=igor_password=ihar=osipov=ADMIN";
+        User user = new User("igor", "igor_password", "ihar", "osipov", UserRole.ADMIN);
 
         String actual = userToStringConverter.convert(user);
 
