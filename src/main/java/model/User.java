@@ -6,11 +6,14 @@ public class User {
     private final String name;
     private final String surname;
 
-    public User(String login, String password, String name, String surname) {
+    private final UserRole role;
+
+    public User(String login, String password, String name, String surname, UserRole role) {
         this.username = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -29,11 +32,16 @@ public class User {
         return surname;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
     @Override
     public String toString() {
         return "User:" + " " + username + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
-                "surname:" + " " + surname;
+                "surname:" + " " + surname + " " +
+                "role:" + " " + role;
     }
 }

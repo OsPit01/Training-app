@@ -8,7 +8,6 @@ import java.util.StringJoiner;
 public class UserToStringConverter {
     private final UserValidator validator = new UserValidator();
 
-
     public String convert(User user) {
         if (!(validator.isValid(user))) {  //todo move to another laye
             throw new IllegalArgumentException(String.format("invalid user = [%s]", user));
@@ -19,6 +18,7 @@ public class UserToStringConverter {
         joiner.add(user.getPassword());
         joiner.add(user.getName());
         joiner.add(user.getSurname());
+        joiner.add(user.getRole().toString());
         return joiner.toString();
     }
 }
