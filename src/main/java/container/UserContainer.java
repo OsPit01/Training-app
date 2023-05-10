@@ -33,6 +33,15 @@ public class UserContainer {
         return null;
     }
 
+    public static User findUserByUsername(String userName) {
+        for (User user : users) {
+            if (user.getUsername().equals(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public static boolean isUserNameAndPasswordExists(String userName, String password) throws UserNotFoundException {
         boolean existUser = false;
         User foundUser = findUserByUsernameAndPassword(userName, password);

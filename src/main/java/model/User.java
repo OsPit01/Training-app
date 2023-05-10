@@ -8,12 +8,15 @@ public class User {
 
     private final UserRole role;
 
-    public User(String login, String password, String name, String surname, UserRole role) {
+    private String ban;
+
+    public User(String login, String password, String name, String surname, UserRole role,String ban) {
         this.username = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.role = role;
+        this.ban = ban;
     }
 
     public String getUsername() {
@@ -36,12 +39,21 @@ public class User {
         return role;
     }
 
+    public void setBan(String ban) {
+        this.ban = ban;
+    }
+
+    public String getBan() {
+        return ban;
+    }
+
     @Override
     public String toString() {
         return "User:" + " " + username + " " +
                 "password:" + " " + password + " " +
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + " " +
-                "role:" + " " + role;
+                "role:" + " " + role + " " +
+                "ban:" +  " " + ban;
     }
 }
