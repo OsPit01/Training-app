@@ -1,5 +1,6 @@
 package converter;
 
+import container.UserSession;
 import model.User;
 import model.UserRole;
 import org.junit.Test;
@@ -31,7 +32,8 @@ public class StringToUserConverterTest {
                 "dimon-maradona",
                 "Van-Clock-Dimon",
                 "rbIba-gold",
-                UserRole.ADMIN
+                UserRole.ADMIN,
+                UserSession.currentUser.getBan()
         );
 
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin");
@@ -50,11 +52,13 @@ public class StringToUserConverterTest {
                 "vany short boy",
                 "Van Clock Vandam",
                 "pushkin aleksandr lol",
-                UserRole.ADMIN
+                UserRole.ADMIN,
+                "ban"
+
         );
 
         User actual = stringToUserConverter.convert(
-                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin"
+                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin=ban"
         );
 
         assertNotNull(actual);
@@ -66,7 +70,7 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvert() {
-        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN);
+        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN,UserSession.currentUser.getBan());
 
         User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin");
 
@@ -76,5 +80,6 @@ public class StringToUserConverterTest {
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getSurname(), actual.getSurname());
         assertEquals(expected.getRole(),actual.getRole());
+        assertEquals(expected.getBan(),actual.getBan());
     }
 }
