@@ -23,10 +23,10 @@ public class UserContainer {
         users.addAll(inputUsers);
     }
 
-    public static User findUserByUsernameAndPassword(String userName, String password) {
+    public static User findUserByUsernameAndPassword(String userName, String password, String status) {
 
         for (User user : users) {
-            if (user.getUsername().equals(userName) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(userName) && user.getPassword().equals(password) && user.getStatus().equals(status)) {
                 return user;
             }
         }
@@ -42,14 +42,14 @@ public class UserContainer {
         return null;
     }
 
-    public static boolean isUserNameAndPasswordExists(String userName, String password) throws UserNotFoundException {
+    public static boolean isUserNameAndPasswordExists(String userName, String password, String status) throws UserNotFoundException {
         boolean existUser = false;
-        User foundUser = findUserByUsernameAndPassword(userName, password);
+        User foundUser = findUserByUsernameAndPassword(userName, password, status);
         if (foundUser != null) {
             existUser = true;
         }
         if (!existUser) {
-            throw new UserNotFoundException("such username or password does not exist");
+            throw new UserNotFoundException("such username or password does not exist or you are blocked");
         }
         return existUser;
     }

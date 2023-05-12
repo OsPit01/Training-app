@@ -34,7 +34,7 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputUsername, inputPassword);
+                    loginCommand.execute(inputUsername, inputPassword,"active");
                     if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
                         System.out.println("1010. choice user for ban");
                     }

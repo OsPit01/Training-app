@@ -8,15 +8,15 @@ public class User {
 
     private final UserRole role;
 
-    private String ban;
+    private String status;
 
-    public User(String login, String password, String name, String surname, UserRole role,String ban) {
+    public User(String login, String password, String name, String surname, UserRole role, String active) {
         this.username = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.role = role;
-        this.ban = ban;
+        this.status = active;
     }
 
     public String getUsername() {
@@ -39,12 +39,12 @@ public class User {
         return role;
     }
 
-    public void setBan(String ban) {
-        this.ban = ban;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getBan() {
-        return ban;
+    public String getStatus() {
+        return status;
     }
 
     @Override
@@ -54,6 +54,6 @@ public class User {
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + " " +
                 "role:" + " " + role + " " +
-                "ban:" +  " " + ban;
+                "ban:" + " " + status;
     }
 }

@@ -6,18 +6,13 @@ import exception.LoginCommandException;
 import exception.UserNotFoundException;
 
 public class LoginCommand {
-    public void execute(String userName, String password) throws LoginCommandException {
+    public void execute(String userName, String password, String status) throws LoginCommandException {
 
         try {
-            if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
-                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
+            if (UserContainer.isUserNameAndPasswordExists(userName, password, status)) {
+                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password, status);
             }
-            String s = UserSession.currentUser.getBan();
-             if (s.equals("ban")) {
-                  System.out.println("you are blocked");
-                  System.exit(0);
-             }
-                System.out.println("\n" + "Successful entry");
+            System.out.println("\n" + "Command successful");
 
         } catch (UserNotFoundException e) {
             System.out.println("user with login = " + " " +

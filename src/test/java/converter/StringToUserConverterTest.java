@@ -33,10 +33,10 @@ public class StringToUserConverterTest {
                 "Van-Clock-Dimon",
                 "rbIba-gold",
                 UserRole.ADMIN,
-                UserSession.currentUser.getBan()
+                "active"
         );
 
-        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin");
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin=active");
 
         assertNotNull(actual);
         assertEquals(expected.getName(), actual.getName());
@@ -70,7 +70,7 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvert() {
-        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN,UserSession.currentUser.getBan());
+        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN,UserSession.currentUser.getStatus());
 
         User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin");
 
@@ -80,6 +80,6 @@ public class StringToUserConverterTest {
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getSurname(), actual.getSurname());
         assertEquals(expected.getRole(),actual.getRole());
-        assertEquals(expected.getBan(),actual.getBan());
+        assertEquals(expected.getStatus(),actual.getStatus());
     }
 }
