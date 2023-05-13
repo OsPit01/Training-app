@@ -7,4 +7,6 @@ public interface CommandConstants {
     int SHOW_ME_LIST_CODE = 4;
 
     int BAN_USERS = 1010;
+
+    int UNBAN = 1011;
 }

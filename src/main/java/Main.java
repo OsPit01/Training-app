@@ -28,23 +28,22 @@ public class Main {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-                case CommandConstants.LOGIN_CODE:
+                case CommandConstants.LOGIN_CODE -> {
                     System.out.println("Your username");
                     String inputUsername = scanner.nextLine();
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputUsername, inputPassword,"active");
+                    loginCommand.execute(inputUsername, inputPassword, "active");
                     if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
-                        System.out.println("1010. choice user for ban");
+                        System.out.println("1010. choice user for ban" + '\n' + "1011. choice user for unban");
                     }
-                    break;
-
-                case CommandConstants.REGISTER_CODE:
+                }
+                case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
                     System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
-                    if (UserContainer.getUsers().toString().contains(createUserName)) {
+                    if (UserContainer.isUserExists(createUserName)) {
                         System.out.println("such a user exist already");
                         return;
                     }
@@ -57,25 +56,36 @@ public class Main {
                     System.out.println("your role");
                     String inputRole = scanner.nextLine();
                     UserRole createRole = UserRole.valueOf(inputRole.toUpperCase());
-                    new RegisterCommand().register(createUserName, createPassword, createName, createSurname, createRole);
-                    break;
-
-                case CommandConstants.EXIT_CODE:
+                    new RegisterCommand().
+                            register(createUserName, createPassword, createName, createSurname, createRole);
+                }
+                case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
                     exitCommand.exit();
-                    break;
-
-                case CommandConstants.SHOW_ME_LIST_CODE:
+                }
+                case CommandConstants.SHOW_ME_LIST_CODE -> {
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
                     printUsersCommand.print();
-                    break;
-
-                case CommandConstants.BAN_USERS:
-                    System.out.println("write name of user for ban");
-                    String user =  scanner.nextLine();
-                    BanUsersCommand banUsersCommand = new BanUsersCommand();
-                    banUsersCommand.ban(user);
-                    break;
+                }
+                case CommandConstants.BAN_USERS -> {
+                    User currentUser = UserSession.currentUser;
+                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
+                        System.out.println("write name of user for ban");
+                        String user = scanner.nextLine();
+                        BanUsersCommand banUsersCommand = new BanUsersCommand();
+                        banUsersCommand.ban(user);
+                    }
+                }
+                case CommandConstants.UNBAN -> {
+                    User currentUser = UserSession.currentUser;
+                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
+                        UserContainer.showUserInBan();
+                        System.out.println("write name of user for unban");
+                        String writeForUnban = scanner.nextLine();
+                        UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
+                        unbanUserCommand.unban(writeForUnban);
+                    }
+                }
             }
         }
     }

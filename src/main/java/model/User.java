@@ -54,6 +54,6 @@ public class User {
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + " " +
                 "role:" + " " + role + " " +
-                "ban:" + " " + status;
+                "status:" + " " + status;
     }
 }

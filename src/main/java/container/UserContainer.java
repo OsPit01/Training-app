@@ -26,7 +26,9 @@ public class UserContainer {
     public static User findUserByUsernameAndPassword(String userName, String password, String status) {
 
         for (User user : users) {
-            if (user.getUsername().equals(userName) && user.getPassword().equals(password) && user.getStatus().equals(status)) {
+            if (user.getUsername().equals(userName)
+                    && user.getPassword().equals(password)
+                    && user.getStatus().equals(status)) {
                 return user;
             }
         }
@@ -42,7 +44,9 @@ public class UserContainer {
         return null;
     }
 
-    public static boolean isUserNameAndPasswordExists(String userName, String password, String status) throws UserNotFoundException {
+    public static boolean isUserNameAndPasswordExists(String userName, String password, String status)
+            throws UserNotFoundException {
+
         boolean existUser = false;
         User foundUser = findUserByUsernameAndPassword(userName, password, status);
         if (foundUser != null) {
@@ -63,5 +67,22 @@ public class UserContainer {
             }
         }
         return result;
+    }
+
+    public static void showUserInBan() {
+        for (User user : users) {
+            if (user.getStatus().equals("ban")) {
+                System.out.println(user);
+            }
+        }
+    }
+
+    public static boolean isUserExists(String userName) {
+        for (User user : users) {
+            if (user.getUsername().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
