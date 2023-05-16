@@ -8,9 +8,9 @@ public class User {
 
     private final UserRole role;
 
-    private String status;
+    private UserStatus status;
 
-    public User(String login, String password, String name, String surname, UserRole role, String active) {
+    public User(String login, String password, String name, String surname, UserRole role, UserStatus active) {
         this.username = login;
         this.password = password;
         this.name = name;
@@ -39,11 +39,11 @@ public class User {
         return role;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 

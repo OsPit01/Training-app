@@ -6,11 +6,11 @@ import exception.LoginCommandException;
 import exception.UserNotFoundException;
 
 public class LoginCommand {
-    public void execute(String userName, String password, String status) throws LoginCommandException {
+    public void execute(String userName, String password) throws LoginCommandException {
 
         try {
-            if (UserContainer.isUserNameAndPasswordExists(userName, password, status)) {
-                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password, status);
+            if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
+                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
             }
             System.out.println("\n" + "Command successful");
 

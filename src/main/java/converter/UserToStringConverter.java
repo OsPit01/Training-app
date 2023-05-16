@@ -19,7 +19,7 @@ public class UserToStringConverter {
         joiner.add(user.getName());
         joiner.add(user.getSurname());
         joiner.add(user.getRole().toString());
-        joiner.add(user.getStatus());
+        joiner.add(user.getStatus().toString());
         return joiner.toString();
     }
 }

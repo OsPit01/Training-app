@@ -3,6 +3,7 @@ package container;
 import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
+import model.UserStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,11 @@ public class UserContainer {
         users.addAll(inputUsers);
     }
 
-    public static User findUserByUsernameAndPassword(String userName, String password, String status) {
+    public static User findUserByUsernameAndPassword(String userName, String password) {
 
         for (User user : users) {
             if (user.getUsername().equals(userName)
-                    && user.getPassword().equals(password)
-                    && user.getStatus().equals(status)) {
+                    && user.getPassword().equals(password)) {
                 return user;
             }
         }
@@ -44,18 +44,22 @@ public class UserContainer {
         return null;
     }
 
-    public static boolean isUserNameAndPasswordExists(String userName, String password, String status)
+    public static boolean isUserNameAndPasswordExists(String userName, String password)
             throws UserNotFoundException {
 
         boolean existUser = false;
-        User foundUser = findUserByUsernameAndPassword(userName, password, status);
+        User foundUser = findUserByUsernameAndPassword(userName, password);
+
         if (foundUser != null) {
             existUser = true;
         }
-        if (!existUser) {
-            throw new UserNotFoundException("such username or password does not exist or you are blocked");
+        if (foundUser != null) {
+            existUser = checkStatus(foundUser);
         }
-        return existUser;
+        if (!existUser) {
+             throw new  UserNotFoundException("You are blocked");
+        }
+        return true;
     }
 
     public static List<User> findUsersByRole(List<UserRole> roles) {
@@ -71,7 +75,7 @@ public class UserContainer {
 
     public static void showUserInBan() {
         for (User user : users) {
-            if (user.getStatus().equals("ban")) {
+            if (user.getStatus().equals(UserStatus.BAN)) {
                 System.out.println(user);
             }
         }
@@ -84,5 +88,10 @@ public class UserContainer {
             }
         }
         return false;
+    }
+    public static boolean checkStatus(User user) {
+        UserStatus statusActive = user.getStatus();
+       UserStatus currentStatus = user.getStatus();
+        return currentStatus.equals(statusActive);
     }
 }

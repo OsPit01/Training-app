@@ -22,9 +22,8 @@ public class Main {
         init();
 
         while (true) {
-            System.out.println("******** Register *********");
-            System.out.println("please do choice");
-            System.out.println("1.Login 2.Register 3.exit 4.showMe list");
+            MenuPrinter menuPrinter = new MenuPrinter();
+            menuPrinter.ghost();
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
@@ -34,9 +33,9 @@ public class Main {
                     System.out.println("password");
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
-                    loginCommand.execute(inputUsername, inputPassword, "active");
+                    loginCommand.execute(inputUsername, inputPassword);
                     if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
-                        System.out.println("1010. choice user for ban" + '\n' + "1011. choice user for unban");
+                        menuPrinter.admin();
                     }
                 }
                 case CommandConstants.REGISTER_CODE -> {
