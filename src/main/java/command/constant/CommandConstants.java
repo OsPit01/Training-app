@@ -9,4 +9,6 @@ public interface CommandConstants {
     int BAN_USERS = 1010;
 
     int UNBAN = 1011;
+
+    int SHOW_USERS_IN_BAN = 0;
 }

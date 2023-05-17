@@ -6,9 +6,6 @@ public class UserValidator {
         if (user == null) {
             return false;
         }
-        if (user.getUsername() == null || user.getPassword() == null || user.getName() == null || user.getSurname() == null) {
-            return false;
-        }
-        return true;
+        return user.getUsername() != null && user.getPassword() != null && user.getName() != null && user.getSurname() != null;
     }
 }

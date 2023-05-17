@@ -57,7 +57,7 @@ public class UserContainer {
             existUser = checkStatus(foundUser);
         }
         if (!existUser) {
-             throw new  UserNotFoundException("You are blocked");
+            throw new UserNotFoundException("You are blocked");
         }
         return true;
     }
@@ -89,9 +89,8 @@ public class UserContainer {
         }
         return false;
     }
+
     public static boolean checkStatus(User user) {
-        UserStatus statusActive = user.getStatus();
-       UserStatus currentStatus = user.getStatus();
-        return currentStatus.equals(statusActive);
+        return user.getStatus() == UserStatus.ACTIVE;
     }
 }

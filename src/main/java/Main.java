@@ -85,6 +85,12 @@ public class Main {
                         unbanUserCommand.unban(writeForUnban);
                     }
                 }
+                case CommandConstants.SHOW_USERS_IN_BAN -> {
+                    User currentUser = UserSession.currentUser;
+                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
+                        UserContainer.showUserInBan();
+                    }
+                }
             }
         }
     }

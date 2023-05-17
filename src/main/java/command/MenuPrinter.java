@@ -9,14 +9,7 @@ public class MenuPrinter {
     }
 
     public void admin() {
-        System.out.println("1010. choice user for ban" + '\n' + "1011. choice user for unban");
-    }
-
-    public void trainer() {
-
-    }
-
-    public void trainee() {
-
+        System.out.println("1010 ---> choice user for ban" + '\n' + "1011 ---> choice user for unban");
+        System.out.println("0 ---> show users in ban");
     }
 }

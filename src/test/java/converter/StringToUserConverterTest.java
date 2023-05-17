@@ -1,8 +1,8 @@
 package converter;
 
-import container.UserSession;
 import model.User;
 import model.UserRole;
+import model.UserStatus;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,6 +15,7 @@ public class StringToUserConverterTest {
     public void testConvertEmptyString() {
         stringToUserConverter.convert("");
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void testConvertBlankString() {
         stringToUserConverter.convert(" ");
@@ -33,7 +34,7 @@ public class StringToUserConverterTest {
                 "Van-Clock-Dimon",
                 "rbIba-gold",
                 UserRole.ADMIN,
-                "active"
+                UserStatus.ACTIVE
         );
 
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin=active");
@@ -53,7 +54,7 @@ public class StringToUserConverterTest {
                 "Van Clock Vandam",
                 "pushkin aleksandr lol",
                 UserRole.ADMIN,
-                "ban"
+                UserStatus.BAN
 
         );
 
@@ -70,16 +71,22 @@ public class StringToUserConverterTest {
 
     @Test
     public void testConvert() {
-        User expected = new User("Oss", "oss_password", "igor", "osipov",UserRole.ADMIN,UserSession.currentUser.getStatus());
+        User expected = new User(
+                "Oss",
+                "oss_password",
+                "igor",
+                "osipov",
+                UserRole.ADMIN,
+                UserStatus.ACTIVE);
 
-        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin");
+        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin=active");
 
         assertNotNull(actual);
         assertEquals(expected.getUsername(), actual.getUsername());
         assertEquals(expected.getPassword(), actual.getPassword());
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getSurname(), actual.getSurname());
-        assertEquals(expected.getRole(),actual.getRole());
-        assertEquals(expected.getStatus(),actual.getStatus());
+        assertEquals(expected.getRole(), actual.getRole());
+        assertEquals(expected.getStatus(), actual.getStatus());
     }
 }
