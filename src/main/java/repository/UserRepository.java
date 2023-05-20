@@ -1,6 +1,5 @@
-package container;
+package repository;
 
-import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
@@ -8,7 +7,7 @@ import model.UserStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserContainer {
+public class UserRepository {
 
     private static final List<User> users = new ArrayList<>();
 
@@ -45,24 +44,6 @@ public class UserContainer {
         throw new NullPointerException();
     }
 
-    public static boolean isUserNameAndPasswordExists(String userName, String password)
-            throws UserNotFoundException {
-
-        boolean existUser = false;
-        User foundUser = findUserByUsernameAndPassword(userName, password);
-
-        if (foundUser != null) {
-            existUser = true;
-        }
-        if (foundUser != null) {
-            existUser = checkStatus(foundUser);
-        }
-        if (!existUser) {
-            throw new UserNotFoundException("You are blocked");
-        }
-        return true;
-    }
-
     public static List<User> findUsersByRole(List<UserRole> roles) {
         List<User> result = new ArrayList<>();
 
@@ -74,24 +55,11 @@ public class UserContainer {
         return result;
     }
 
-    public static void getUserInBan() {
+    public static void findUserInBan() {
         for (User user : users) {
             if (user.getStatus().equals(UserStatus.BAN)) {
                 System.out.println(user);
             }
         }
-    }
-
-    public static boolean isUserExists(String userName) {
-        for (User user : users) {
-            if (user.getUsername().equals(userName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean checkStatus(User user) {
-        return user.getStatus() == UserStatus.ACTIVE;
     }
 }

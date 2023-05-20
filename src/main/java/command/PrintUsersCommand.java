@@ -2,8 +2,8 @@ package command;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import container.UserContainer;
-import container.UserSession;
+import repository.UserRepository;
+import repository.UserSession;
 import exception.PrintUserCommandException;
 import model.User;
 import model.UserRole;
@@ -30,9 +30,9 @@ public class PrintUsersCommand {
 
         switch (currentRole) {
             case ADMIN -> usersByRole =
-                    UserContainer.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
-            case TRAINER -> usersByRole = UserContainer.findUsersByRole(List.of(UserRole.TRAINEE));
-            case TRAINEE -> usersByRole = UserContainer.findUsersByRole(List.of(UserRole.TRAINER));
+                    UserRepository.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
+            case TRAINER -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINEE));
+            case TRAINEE -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
         printFormatUsersToJson(usersByRole);
     }

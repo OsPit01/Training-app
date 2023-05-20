@@ -1,7 +1,8 @@
 package command;
 
-import container.UserContainer;
-import container.UserSession;
+import Service.UserService;
+import repository.UserRepository;
+import repository.UserSession;
 import exception.LoginCommandException;
 import exception.UserNotFoundException;
 
@@ -9,8 +10,9 @@ public class LoginCommand {
     public void execute(String userName, String password) throws LoginCommandException {
 
         try {
-            if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
-                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
+            UserService userService = new UserService();
+            if (userService.isUserNameAndPasswordExists(userName, password)) {
+                UserSession.currentUser = UserRepository.findUserByUsernameAndPassword(userName, password);
             }
             System.out.println("\n" + "Command successful");
 

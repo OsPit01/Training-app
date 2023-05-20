@@ -1,10 +1,11 @@
+import Service.UserService;
 import command.*;
 import command.constant.CommandConstants;
-import container.UserContainer;
-import container.UserSession;
 import file.UserFromFileReader;
 import model.User;
 import model.UserRole;
+import repository.UserRepository;
+import repository.UserSession;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class Main {
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
-        UserContainer.saveAll(fileUsers);
+        UserRepository.saveAll(fileUsers);
     }
 
     public static void main(String[] args) throws Exception {
@@ -42,7 +43,8 @@ public class Main {
                     System.out.println("Create your account");
                     System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
-                    if (UserContainer.isUserExists(createUserName)) {
+                    UserService userService = new UserService();
+                    if (userService.isUserExists(createUserName)) {
                         System.out.println("such a user exist already");
                         return;
                     }
@@ -77,7 +79,7 @@ public class Main {
                 case CommandConstants.UNBAN -> {
                     User currentUser = UserSession.currentUser;
                     if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserContainer.getUserInBan();
+                        UserRepository.findUserInBan();
                         System.out.println("write name of user for unban");
                         String userName = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -87,7 +89,7 @@ public class Main {
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     User currentUser = UserSession.currentUser;
                     if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserContainer.getUserInBan();
+                        UserRepository.findUserInBan();
                     }
                 }
             }
