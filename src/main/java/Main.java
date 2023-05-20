@@ -23,7 +23,7 @@ public class Main {
 
         while (true) {
             MenuPrinter menuPrinter = new MenuPrinter();
-            menuPrinter.ghost();
+            menuPrinter.execute(UserRole.GHOST);
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
@@ -35,7 +35,7 @@ public class Main {
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputUsername, inputPassword);
                     if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
-                        menuPrinter.admin();
+                        menuPrinter.execute(UserRole.ADMIN);
                     }
                 }
                 case CommandConstants.REGISTER_CODE -> {
@@ -66,29 +66,28 @@ public class Main {
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
                     printUsersCommand.print();
                 }
-                case CommandConstants.BAN_USERS -> {
-                    User currentUser = UserSession.currentUser;
-                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
+                case CommandConstants.BAN_USER -> {
+                    if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
                         System.out.println("write name of user for ban");
-                        String user = scanner.nextLine();
+                        String userName = scanner.nextLine();
                         BanUsersCommand banUsersCommand = new BanUsersCommand();
-                        banUsersCommand.ban(user);
+                        banUsersCommand.execute(userName);
                     }
                 }
                 case CommandConstants.UNBAN -> {
                     User currentUser = UserSession.currentUser;
-                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
-                        UserContainer.showUserInBan();
+                    if (UserRole.ADMIN == currentUser.getRole()) {
+                        UserContainer.getUserInBan();
                         System.out.println("write name of user for unban");
-                        String writeForUnban = scanner.nextLine();
+                        String userName = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
-                        unbanUserCommand.unban(writeForUnban);
+                        unbanUserCommand.execute(userName);
                     }
                 }
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     User currentUser = UserSession.currentUser;
-                    if (currentUser.getRole().equals(UserRole.ADMIN)) {
-                        UserContainer.showUserInBan();
+                    if (UserRole.ADMIN == currentUser.getRole()) {
+                        UserContainer.getUserInBan();
                     }
                 }
             }

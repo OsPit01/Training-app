@@ -36,12 +36,13 @@ public class UserContainer {
     }
 
     public static User findUserByUsername(String userName) {
+
         for (User user : users) {
             if (user.getUsername().equals(userName)) {
                 return user;
             }
         }
-        return null;
+        throw new NullPointerException();
     }
 
     public static boolean isUserNameAndPasswordExists(String userName, String password)
@@ -73,7 +74,7 @@ public class UserContainer {
         return result;
     }
 
-    public static void showUserInBan() {
+    public static void getUserInBan() {
         for (User user : users) {
             if (user.getStatus().equals(UserStatus.BAN)) {
                 System.out.println(user);
