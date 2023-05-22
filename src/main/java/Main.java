@@ -1,4 +1,3 @@
-import Service.UserService;
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
@@ -22,9 +21,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         init();
 
+        //noinspection InfiniteLoopStatement
         while (true) {
+
             MenuPrinter menuPrinter = new MenuPrinter();
-            menuPrinter.execute(UserRole.GHOST);
+            menuPrinter.print(UserRole.GHOST);
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
@@ -35,19 +36,12 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputUsername, inputPassword);
-                    if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
-                        menuPrinter.execute(UserRole.ADMIN);
-                    }
+                    menuPrinter.print(UserSession.currentUser.getRole());
                 }
                 case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
                     System.out.println("Your userName");
                     String createUserName = scanner.nextLine();
-                    UserService userService = new UserService();
-                    if (userService.isUserExists(createUserName)) {
-                        System.out.println("such a user exist already");
-                        return;
-                    }
                     System.out.println("create password ");
                     String createPassword = scanner.nextLine();
                     System.out.println("\ninput your name");
@@ -58,11 +52,11 @@ public class Main {
                     String inputRole = scanner.nextLine();
                     UserRole createRole = UserRole.valueOf(inputRole.toUpperCase());
                     new RegisterCommand().
-                            register(createUserName, createPassword, createName, createSurname, createRole);
+                            execute(createUserName, createPassword, createName, createSurname, createRole);
                 }
                 case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
-                    exitCommand.exit();
+                    exitCommand.execute();
                 }
                 case CommandConstants.SHOW_ME_LIST_CODE -> {
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
@@ -79,7 +73,7 @@ public class Main {
                 case CommandConstants.UNBAN -> {
                     User currentUser = UserSession.currentUser;
                     if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserRepository.findUserInBan();
+                        UserRepository.getUserInBan();
                         System.out.println("write name of user for unban");
                         String userName = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -89,7 +83,7 @@ public class Main {
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     User currentUser = UserSession.currentUser;
                     if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserRepository.findUserInBan();
+                        UserRepository.getUserInBan();
                     }
                 }
             }

@@ -55,7 +55,7 @@ public class UserRepository {
         return result;
     }
 
-    public static void findUserInBan() {
+    public static void getUserInBan() {
         for (User user : users) {
             if (user.getStatus().equals(UserStatus.BAN)) {
                 System.out.println(user);

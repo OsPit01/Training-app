@@ -4,7 +4,7 @@ import model.UserRole;
 
 public class MenuPrinter {
 
-    public void execute(UserRole userRole) {
+    public void print(UserRole userRole) {
         if (UserRole.GHOST == userRole) {
             System.out.println("******** Register *********");
             System.out.println("please do choice");

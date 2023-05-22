@@ -24,7 +24,7 @@ public class UserService {
             return true;
 
     }
-    public static boolean isUserExists(String userName) {
+    public  boolean isUserExists(String userName) {
         for (User user : UserRepository.getUsers()) {
             if (user.getUsername().equals(userName)) {
                 return true;
