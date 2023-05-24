@@ -1,18 +1,20 @@
 package command;
 
-import repository.UserRepository;
+import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
+import repository.UserRepository;
 
 public class BanUsersCommand {
-    public void execute(String userName) {
+    public void execute(String userName) throws UserNotFoundException {
         User user = UserRepository.findUserByUsername(userName);
 
         if (UserRole.ADMIN == user.getRole()) {
             System.out.println("this is Admin");
-        } else {
-            user.setStatus(UserStatus.BAN);
+            return;
         }
+        user.setStatus(UserStatus.BAN);
+        System.out.println("User is in ban");
     }
 }

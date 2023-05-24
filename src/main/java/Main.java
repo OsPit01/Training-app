@@ -1,8 +1,10 @@
+import Ui.MenuPrinter;
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
 import model.User;
 import model.UserRole;
+import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
 
@@ -11,11 +13,13 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final MenuPrinter menuPrinter = new MenuPrinter();
 
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         UserRepository.saveAll(fileUsers);
+        menuPrinter.print(UserRole.GUEST);
     }
 
     public static void main(String[] args) throws Exception {
@@ -23,9 +27,6 @@ public class Main {
 
         //noinspection InfiniteLoopStatement
         while (true) {
-
-            MenuPrinter menuPrinter = new MenuPrinter();
-            menuPrinter.print(UserRole.GHOST);
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
@@ -41,18 +42,24 @@ public class Main {
                 case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
                     System.out.println("Your userName");
-                    String createUserName = scanner.nextLine();
+                    String inputUsername = scanner.nextLine();
                     System.out.println("create password ");
-                    String createPassword = scanner.nextLine();
+                    String inputPassword = scanner.nextLine();
                     System.out.println("\ninput your name");
-                    String createName = scanner.nextLine();
+                    String inputName = scanner.nextLine();
                     System.out.println("\ninput your surname");
-                    String createSurname = scanner.nextLine();
+                    String inputSurname = scanner.nextLine();
                     System.out.println("your role");
                     String inputRole = scanner.nextLine();
-                    UserRole createRole = UserRole.valueOf(inputRole.toUpperCase());
-                    new RegisterCommand().
-                            execute(createUserName, createPassword, createName, createSurname, createRole);
+                    UserRole convertToUserRole = UserRole.valueOf(inputRole.toUpperCase());
+                    User user = new User(
+                            inputUsername,
+                            inputPassword,
+                            inputName,
+                            inputSurname,
+                            convertToUserRole,
+                            UserStatus.ACTIVE);
+                    new RegisterCommand().execute(user);
                 }
                 case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
@@ -60,31 +67,36 @@ public class Main {
                 }
                 case CommandConstants.SHOW_ME_LIST_CODE -> {
                     PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.print();
+                    printUsersCommand.execute();
                 }
                 case CommandConstants.BAN_USER -> {
-                    if (UserSession.currentUser.getRole().equals(UserRole.ADMIN)) {
+                    UserRole currentRole = UserSession.currentUser.getRole();
+                    if (currentRole == UserRole.ADMIN) {
                         System.out.println("write name of user for ban");
-                        String userName = scanner.nextLine();
+                        String inputUsername = scanner.nextLine();
                         BanUsersCommand banUsersCommand = new BanUsersCommand();
-                        banUsersCommand.execute(userName);
+                        banUsersCommand.execute(inputUsername);
                     }
                 }
                 case CommandConstants.UNBAN -> {
-                    User currentUser = UserSession.currentUser;
-                    if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserRepository.getUserInBan();
+                    UserRole currentRole = UserSession.currentUser.getRole();
+                    if (currentRole == UserRole.ADMIN) {
+                        UserRepository.UserInBan();
                         System.out.println("write name of user for unban");
-                        String userName = scanner.nextLine();
+                        String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
-                        unbanUserCommand.execute(userName);
+                        unbanUserCommand.execute(inputUsername);
                     }
                 }
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
-                    User currentUser = UserSession.currentUser;
-                    if (UserRole.ADMIN == currentUser.getRole()) {
-                        UserRepository.getUserInBan();
+                    UserRole currentRole = UserSession.currentUser.getRole();
+                    if (currentRole == UserRole.ADMIN) {
+                        UserRepository.UserInBan();
                     }
+                }
+                case CommandConstants.RETURN_MENU -> {
+                    MenuPrinter menuPrinter1 = new MenuPrinter();
+                    menuPrinter1.print(UserRole.GUEST);
                 }
             }
         }

@@ -1,17 +1,18 @@
 package command;
 
-import Service.UserService;
-import repository.UserRepository;
-import repository.UserSession;
 import exception.LoginCommandException;
 import exception.UserNotFoundException;
+import repository.UserRepository;
+import repository.UserSession;
+import service.UserService;
 
 public class LoginCommand {
-    public void execute(String userName, String password) throws LoginCommandException {
+    private final UserService userService = new UserService();
 
+    public void execute(String userName, String password) throws LoginCommandException {
         try {
-            UserService userService = new UserService();
-            if (userService.isUserNameAndPasswordExists(userName, password)) {
+
+            if (userService.login(userName, password)) {
                 UserSession.currentUser = UserRepository.findUserByUsernameAndPassword(userName, password);
             }
             System.out.println("\n" + "Command successful");

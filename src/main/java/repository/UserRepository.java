@@ -1,5 +1,6 @@
 package repository;
 
+import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
@@ -23,7 +24,7 @@ public class UserRepository {
         users.addAll(inputUsers);
     }
 
-    public static User findUserByUsernameAndPassword(String userName, String password) {
+    public static User findUserByUsernameAndPassword(String userName, String password) throws UserNotFoundException {
 
         for (User user : users) {
             if (user.getUsername().equals(userName)
@@ -31,17 +32,17 @@ public class UserRepository {
                 return user;
             }
         }
-        return null;
+     throw new UserNotFoundException();
     }
 
-    public static User findUserByUsername(String userName) {
+    public static User findUserByUsername(String userName) throws UserNotFoundException {
 
         for (User user : users) {
             if (user.getUsername().equals(userName)) {
                 return user;
             }
         }
-        throw new NullPointerException();
+        throw new UserNotFoundException();
     }
 
     public static List<User> findUsersByRole(List<UserRole> roles) {
@@ -55,7 +56,7 @@ public class UserRepository {
         return result;
     }
 
-    public static void getUserInBan() {
+    public static void UserInBan() {
         for (User user : users) {
             if (user.getStatus().equals(UserStatus.BAN)) {
                 System.out.println(user);

@@ -24,7 +24,7 @@ public class PrintUsersCommand {
         System.out.println(result);
     }
 
-    public void print() throws PrintUserCommandException {
+    public void execute() throws PrintUserCommandException {
         UserRole currentRole = UserSession.currentUser.getRole();
         List<User> usersByRole = new ArrayList<>();
 

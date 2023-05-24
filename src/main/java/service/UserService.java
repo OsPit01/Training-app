@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import exception.UserNotFoundException;
 import model.User;
@@ -7,17 +7,14 @@ import repository.UserRepository;
 
 public class UserService {
 
-    public boolean isUserNameAndPasswordExists(String username,String password) throws UserNotFoundException {
-
+    public boolean login(String username, String password) throws UserNotFoundException {
             boolean existUser = false;
             User foundUser = UserRepository.findUserByUsernameAndPassword(username, password);
 
             if (foundUser != null) {
-                existUser = true;
+                existUser = isActive(foundUser);
             }
-            if (foundUser != null) {
-                existUser = isStatus(foundUser);
-            }
+
             if (!existUser) {
                 throw new UserNotFoundException("You are blocked");
             }
@@ -32,7 +29,7 @@ public class UserService {
         }
         return false;
     }
-    public boolean isStatus(User user) {
+    public boolean isActive(User user) {
         return user.getStatus() == UserStatus.ACTIVE;
     }
 }
