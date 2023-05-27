@@ -3,7 +3,6 @@ package command;
 import exception.LoginCommandException;
 import exception.UserNotFoundException;
 import repository.UserRepository;
-import repository.UserSession;
 import service.UserService;
 
 public class LoginCommand {
@@ -11,10 +10,8 @@ public class LoginCommand {
 
     public void execute(String userName, String password) throws LoginCommandException {
         try {
-
-            if (userService.login(userName, password)) {
-                UserSession.currentUser = UserRepository.findUserByUsernameAndPassword(userName, password);
-            }
+            userService.login(userName, password);
+            UserRepository.findUserByUsernameAndPassword(userName, password);
             System.out.println("\n" + "Command successful");
 
         } catch (UserNotFoundException e) {

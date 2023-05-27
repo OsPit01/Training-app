@@ -1,8 +1,6 @@
 package command;
 
-import Ui.MenuPrinter;
 import model.User;
-import model.UserRole;
 import repository.UserRepository;
 import service.UserService;
 
@@ -16,7 +14,5 @@ public class RegisterCommand {
         }
         UserRepository.save(user);
         System.out.println("Registration was successful");
-        MenuPrinter menuPrinter = new MenuPrinter();
-        menuPrinter.print(UserRole.GUEST);
     }
 }

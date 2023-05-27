@@ -11,6 +11,4 @@ public interface CommandConstants {
     int UNBAN = 1011;
 
     int SHOW_USERS_IN_BAN = 0;
-
-    int RETURN_MENU = 5;
 }

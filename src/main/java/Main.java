@@ -1,4 +1,3 @@
-import Ui.MenuPrinter;
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
@@ -7,6 +6,7 @@ import model.UserRole;
 import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
+import ui.MenuPrinter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,16 +19,14 @@ public class Main {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         UserRepository.saveAll(fileUsers);
-        menuPrinter.print(UserRole.GUEST);
     }
 
     public static void main(String[] args) throws Exception {
         init();
-
         //noinspection InfiniteLoopStatement
         while (true) {
+            menuPrinter.print();
             int choice = Integer.parseInt(scanner.nextLine());
-
             switch (choice) {
                 case CommandConstants.LOGIN_CODE -> {
                     System.out.println("Your username");
@@ -37,7 +35,6 @@ public class Main {
                     String inputPassword = scanner.nextLine();
                     LoginCommand loginCommand = new LoginCommand();
                     loginCommand.execute(inputUsername, inputPassword);
-                    menuPrinter.print(UserSession.currentUser.getRole());
                 }
                 case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
@@ -51,15 +48,17 @@ public class Main {
                     String inputSurname = scanner.nextLine();
                     System.out.println("your role");
                     String inputRole = scanner.nextLine();
-                    UserRole convertToUserRole = UserRole.valueOf(inputRole.toUpperCase());
+                    UserRole inputUserRole = UserRole.valueOf(inputRole.toUpperCase());
                     User user = new User(
                             inputUsername,
                             inputPassword,
                             inputName,
                             inputSurname,
-                            convertToUserRole,
-                            UserStatus.ACTIVE);
-                    new RegisterCommand().execute(user);
+                            inputUserRole,
+                            UserStatus.ACTIVE
+                    );
+                    RegisterCommand registerCommand = new RegisterCommand();
+                    registerCommand.execute(user);
                 }
                 case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
@@ -91,12 +90,8 @@ public class Main {
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (currentRole == UserRole.ADMIN) {
-                        UserRepository.UserInBan();
+                        UserRepository.UserInBan(); // TODO move to command
                     }
-                }
-                case CommandConstants.RETURN_MENU -> {
-                    MenuPrinter menuPrinter1 = new MenuPrinter();
-                    menuPrinter1.print(UserRole.GUEST);
                 }
             }
         }
