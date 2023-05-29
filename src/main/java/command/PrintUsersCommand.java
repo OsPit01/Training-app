@@ -2,11 +2,11 @@ package command;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import repository.UserRepository;
-import repository.UserSession;
 import exception.PrintUserCommandException;
 import model.User;
 import model.UserRole;
+import repository.UserRepository;
+import repository.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +30,11 @@ public class PrintUsersCommand {
 
         switch (currentRole) {
             case ADMIN -> usersByRole =
-                    UserRepository.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
-            case TRAINER -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINEE));
-            case TRAINEE -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINER));
+                    UserRepository.getListUsersInBan(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
+            case TRAINER -> usersByRole = UserRepository.getListUsersInBan(List.of(UserRole.TRAINEE));
+            case TRAINEE -> usersByRole = UserRepository.getListUsersInBan(List.of(UserRole.TRAINER));
         }
         printFormatUsersToJson(usersByRole);
     }
+
 }

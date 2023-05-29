@@ -7,6 +7,9 @@ import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserService {
 
     public void login(String username, String password) throws LoginCommandException {
@@ -22,16 +25,22 @@ public class UserService {
 
     }
 
-    public boolean isUserExists(String userName) {
-        for (User user : UserRepository.getUsers()) {
-            if (user.getUsername().equals(userName)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isUserExists(String userName) throws UserNotFoundException {
+        User result = UserRepository.findUserByUsername(userName);
+        return result.getUsername().equals(userName);
     }
 
     public boolean isActive(User user) {
         return user.getStatus() == UserStatus.ACTIVE;
+    }
+
+    public List<User> getListUserInBan() {
+        List<User> result = new ArrayList<>();
+        for (User user : UserRepository.getUsers()) {
+            if (user.getStatus().equals(UserStatus.BAN)) {
+                result.add(user);
+            }
+        }
+        return result;
     }
 }

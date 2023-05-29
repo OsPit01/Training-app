@@ -6,6 +6,7 @@ import model.UserRole;
 import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
+import service.UserService;
 import ui.MenuPrinter;
 
 import java.util.List;
@@ -80,7 +81,8 @@ public class Main {
                 case CommandConstants.UNBAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (currentRole == UserRole.ADMIN) {
-                        UserRepository.UserInBan();
+                        UserService userService = new UserService();  // TODO move to command
+                        System.out.println(userService.getListUserInBan());
                         System.out.println("write name of user for unban");
                         String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -90,7 +92,8 @@ public class Main {
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (currentRole == UserRole.ADMIN) {
-                        UserRepository.UserInBan(); // TODO move to command
+                        UserService userService = new UserService();  // TODO move to command
+                        System.out.println(userService.getListUserInBan());
                     }
                 }
             }

@@ -12,7 +12,7 @@ public class LoginCommand {
         try {
             userService.login(userName, password);
             UserRepository.findUserByUsernameAndPassword(userName, password);
-            System.out.println("\n" + "Command successful");
+            System.out.println("Command successful");
 
         } catch (UserNotFoundException e) {
             System.out.println("user with login = " + " " +

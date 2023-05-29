@@ -3,7 +3,6 @@ package repository;
 import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
-import model.UserStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class UserRepository {
                 return user;
             }
         }
-     throw new UserNotFoundException();
+        throw new UserNotFoundException();
     }
 
     public static User findUserByUsername(String userName) throws UserNotFoundException {
@@ -45,7 +44,7 @@ public class UserRepository {
         throw new UserNotFoundException();
     }
 
-    public static List<User> findUsersByRole(List<UserRole> roles) {
+    public static List<User> getListUsersInBan(List<UserRole> roles) {
         List<User> result = new ArrayList<>();
 
         for (User user : users) {
@@ -54,13 +53,5 @@ public class UserRepository {
             }
         }
         return result;
-    }
-
-    public static void UserInBan() {
-        for (User user : users) {
-            if (user.getStatus().equals(UserStatus.BAN)) {
-                System.out.println(user);
-            }
-        }
     }
 }
