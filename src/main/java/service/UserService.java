@@ -16,14 +16,13 @@ public class UserService {
 
         try {
             User foundUser = UserRepository.findUserByUsernameAndPassword(username, password);
-            if (isActive(foundUser)) {
-                UserSession.currentUser = foundUser;
-            }
+            UserSession.currentUser = foundUser;
             if (!isActive(foundUser)) {
                 throw new LoginException("you are blocked");
             }
+            UserSession.currentUser = foundUser;
         } catch (UserNotFoundException e) {
-            throw new LoginException("Login error");
+            throw new LoginException("Login error",e);
         }
     }
 
