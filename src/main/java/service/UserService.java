@@ -7,7 +7,6 @@ import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -22,7 +21,7 @@ public class UserService {
             }
             UserSession.currentUser = foundUser;
         } catch (UserNotFoundException e) {
-            throw new LoginException("Login error",e);
+            throw new LoginException("Login error", e);
         }
     }
 
@@ -40,13 +39,6 @@ public class UserService {
     }
 
     public List<User> getUsersInBan() {
-        List<User> result = new ArrayList<>();
-        List<User> findUserByStatus = UserRepository.getUsers();
-        for (User user : findUserByStatus) {
-            if (UserStatus.BAN == user.getStatus()) {
-                result.add(user);
-            }
-        }
-        return result;
+        return UserRepository.findUserByStatus();
     }
 }
