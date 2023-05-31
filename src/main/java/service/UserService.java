@@ -19,6 +19,9 @@ public class UserService {
             if (isActive(foundUser)) {
                 UserSession.currentUser = foundUser;
             }
+            if (!isActive(foundUser)) {
+                throw new LoginException("you are blocked");
+            }
         } catch (UserNotFoundException e) {
             throw new LoginException("Login error");
         }
@@ -37,10 +40,11 @@ public class UserService {
         return UserStatus.ACTIVE == user.getStatus();
     }
 
-    public List<User> getUserInBan() {
+    public List<User> getUsersInBan() {
         List<User> result = new ArrayList<>();
-        for (User user : UserRepository.getUsers()) {
-            if (user.getStatus().equals(UserStatus.BAN)) {
+        List<User> findUserByStatus = UserRepository.getUsers();
+        for (User user : findUserByStatus) {
+            if (UserStatus.BAN == user.getStatus()) {
                 result.add(user);
             }
         }

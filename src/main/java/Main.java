@@ -71,7 +71,7 @@ public class Main {
                 }
                 case CommandConstants.BAN_USER -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
-                    if (currentRole == UserRole.ADMIN) {
+                    if (UserRole.ADMIN == currentRole) {
                         System.out.println("write name of user for ban");
                         String inputUsername = scanner.nextLine();
                         BanUsersCommand banUsersCommand = new BanUsersCommand();
@@ -80,9 +80,9 @@ public class Main {
                 }
                 case CommandConstants.UNBAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
-                    if (currentRole == UserRole.ADMIN) {
+                    if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();  // TODO move to command
-                        System.out.println(userService.getUserInBan());
+                        System.out.println(userService.getUsersInBan());
                         System.out.println("write name of user for unban");
                         String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -91,9 +91,9 @@ public class Main {
                 }
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
-                    if (currentRole == UserRole.ADMIN) {
+                    if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();  // TODO move to command
-                        System.out.println(userService.getUserInBan());
+                        System.out.println(userService.getUsersInBan());
                     }
                 }
             }
