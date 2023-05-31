@@ -82,7 +82,7 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (currentRole == UserRole.ADMIN) {
                         UserService userService = new UserService();  // TODO move to command
-                        System.out.println(userService.getListUserInBan());
+                        System.out.println(userService.getUserInBan());
                         System.out.println("write name of user for unban");
                         String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -93,7 +93,7 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (currentRole == UserRole.ADMIN) {
                         UserService userService = new UserService();  // TODO move to command
-                        System.out.println(userService.getListUserInBan());
+                        System.out.println(userService.getUserInBan());
                     }
                 }
             }

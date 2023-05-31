@@ -1,6 +1,6 @@
 package service;
 
-import exception.LoginCommandException;
+import exception.LoginException;
 import exception.UserNotFoundException;
 import model.User;
 import model.UserStatus;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserService {
 
-    public void login(String username, String password) throws LoginCommandException {
+    public void login(String username, String password) throws LoginException {
 
         try {
             User foundUser = UserRepository.findUserByUsernameAndPassword(username, password);
@@ -20,21 +20,24 @@ public class UserService {
                 UserSession.currentUser = foundUser;
             }
         } catch (UserNotFoundException e) {
-            throw new LoginCommandException("you are blocked");
+            throw new LoginException("Login error");
         }
-
     }
 
-    public boolean isUserExists(String userName) throws UserNotFoundException {
-        User result = UserRepository.findUserByUsername(userName);
-        return result.getUsername().equals(userName);
+    public boolean isUserExists(String username) {
+        try {
+            UserRepository.findUserByUsername(username);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
     }
 
     public boolean isActive(User user) {
-        return user.getStatus() == UserStatus.ACTIVE;
+        return UserStatus.ACTIVE == user.getStatus();
     }
 
-    public List<User> getListUserInBan() {
+    public List<User> getUserInBan() {
         List<User> result = new ArrayList<>();
         for (User user : UserRepository.getUsers()) {
             if (user.getStatus().equals(UserStatus.BAN)) {

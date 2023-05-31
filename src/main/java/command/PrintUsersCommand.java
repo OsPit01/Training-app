@@ -30,11 +30,10 @@ public class PrintUsersCommand {
 
         switch (currentRole) {
             case ADMIN -> usersByRole =
-                    UserRepository.getListUsersInBan(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
-            case TRAINER -> usersByRole = UserRepository.getListUsersInBan(List.of(UserRole.TRAINEE));
-            case TRAINEE -> usersByRole = UserRepository.getListUsersInBan(List.of(UserRole.TRAINER));
+                    UserRepository.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
+            case TRAINER -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINEE));
+            case TRAINEE -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
         printFormatUsersToJson(usersByRole);
     }
-
 }

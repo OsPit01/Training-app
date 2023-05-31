@@ -23,10 +23,10 @@ public class UserRepository {
         users.addAll(inputUsers);
     }
 
-    public static User findUserByUsernameAndPassword(String userName, String password) throws UserNotFoundException {
+    public static User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException {
 
         for (User user : users) {
-            if (user.getUsername().equals(userName)
+            if (user.getUsername().equals(username)
                     && user.getPassword().equals(password)) {
                 return user;
             }
@@ -34,17 +34,17 @@ public class UserRepository {
         throw new UserNotFoundException();
     }
 
-    public static User findUserByUsername(String userName) throws UserNotFoundException {
+    public static User findUserByUsername(String username) throws UserNotFoundException {
 
         for (User user : users) {
-            if (user.getUsername().equals(userName)) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
         throw new UserNotFoundException();
     }
 
-    public static List<User> getListUsersInBan(List<UserRole> roles) {
+    public static List<User> findUsersByRole(List<UserRole> roles) {
         List<User> result = new ArrayList<>();
 
         for (User user : users) {
