@@ -1,22 +1,19 @@
 package command;
 
-import container.UserContainer;
-import container.UserSession;
 import exception.LoginCommandException;
-import exception.UserNotFoundException;
+import exception.LoginException;
+import service.UserService;
 
 public class LoginCommand {
-    public void execute(String userName, String password) throws LoginCommandException {
+    private final UserService userService = new UserService();
 
+    public void execute(String username, String password) throws LoginCommandException {
         try {
-            if (UserContainer.isUserNameAndPasswordExists(userName, password)) {
-                System.out.println("\n" + "Successful entry");
-                UserSession.currentUser = UserContainer.findUserByUsernameAndPassword(userName, password);
-            }
-
-        } catch (UserNotFoundException e) {
+            userService.login(username, password);
+            System.out.println("Command successful");
+        } catch (LoginException e) {
             System.out.println("user with login = " + " " +
-                    userName + " " + "and password = " + " " +
+                    username + " " + "and password = " + " " +
                     password + " " + "not found in the system");
             throw new LoginCommandException("login error", e);
         }

@@ -1,12 +1,12 @@
 package command;
 
-import container.UserContainer;
 import file.UserToFileWriter;
+import repository.UserRepository;
 
 public class ExitCommand {
-    public void exit() {
+    public void execute() {
         UserToFileWriter userToFileWriter = new UserToFileWriter();
-        userToFileWriter.write(UserContainer.getUsers());
+        userToFileWriter.write(UserRepository.getUsers());
 
         System.exit(0);
     }

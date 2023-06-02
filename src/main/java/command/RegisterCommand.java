@@ -1,14 +1,18 @@
 package command;
 
-import container.UserContainer;
 import model.User;
-import model.UserRole;
+import repository.UserRepository;
+import service.UserService;
 
 public class RegisterCommand {
+    private final UserService userService = new UserService();
 
-    public void register(String createUserName, String createPassword, String name, String surname, UserRole role) {
-        User user = new User(createUserName, createPassword, name, surname, role);
-        UserContainer.save(user);
-        System.out.println("Registration was successful");
+    public void execute(User user) {
+        if (userService.isUserExists(user.getUsername())) {
+            System.out.println("such a user exist already");
+        } else {
+            UserRepository.save(user);
+            System.out.println("Registration was successful");
+        }
     }
 }
