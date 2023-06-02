@@ -39,6 +39,6 @@ public class UserService {
     }
 
     public List<User> getUsersInBan() {
-        return UserRepository.findUserByStatus();
+        return UserRepository.findUsersByStatus(UserStatus.BAN);
     }
 }

@@ -55,10 +55,10 @@ public class UserRepository {
         return result;
     }
 
-    public static List<User> findUserByStatus() {
+    public static List<User> findUsersByStatus(UserStatus status) {
         List<User> result = new ArrayList<>();
         for (User user : users) {
-            if (UserStatus.BAN == user.getStatus()) {
+            if (status == user.getStatus()) {
                 result.add(user);
             }
         }
