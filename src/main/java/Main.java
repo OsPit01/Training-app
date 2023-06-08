@@ -1,6 +1,8 @@
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
+import mail.GeneratorPassword;
+import mail.MailSender;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
@@ -39,10 +41,11 @@ public class Main {
                 }
                 case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
-                    System.out.println("Your userName");
+                    System.out.println("Your username");
                     String inputUsername = scanner.nextLine();
-                    System.out.println("create password ");
-                    String inputPassword = scanner.nextLine();
+                    System.out.println("your email");
+                    String inputPassword = new GeneratorPassword().generatedPassword();
+                    String inputEmail = scanner.nextLine();
                     System.out.println("\ninput your name");
                     String inputName = scanner.nextLine();
                     System.out.println("\ninput your surname");
@@ -60,6 +63,9 @@ public class Main {
                     );
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.execute(user);
+                    MailSender mail = new MailSender();
+                    mail.sendToEmail(inputEmail, inputPassword);
+                    System.out.println("Registration successful");
                 }
                 case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
