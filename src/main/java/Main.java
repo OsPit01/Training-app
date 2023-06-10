@@ -1,8 +1,6 @@
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
-import mail.PasswordGenerator;
-import mail.MailSender;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
