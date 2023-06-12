@@ -8,7 +8,7 @@ public class User {
 
     private UserRole role;
 
-    private  UserStatus status;
+    private UserStatus status;
 
     private String email;
 
