@@ -97,6 +97,13 @@ public class Main {
                         System.out.println(userService.getUsersInBan());
                     }
                 }
+                case CommandConstants.CHANGE_PASSWORD -> {
+                    System.out.println("input your new password");
+                    String password = scanner.nextLine();
+                    CommandChangePassword commandChangePassword = new CommandChangePassword();
+                    commandChangePassword.execute(password);
+                    System.out.println("password changed successfully");
+                }
             }
         }
     }
