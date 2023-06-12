@@ -61,7 +61,6 @@ public class Main {
                     );
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.execute(user);
-                    System.out.println("Registration successful");
                 }
                 case CommandConstants.EXIT_CODE -> {
                     ExitCommand exitCommand = new ExitCommand();
