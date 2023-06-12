@@ -10,13 +10,25 @@ public class User {
 
     private UserStatus status;
 
-    public User(String login, String password, String name, String surname, UserRole role, UserStatus status) {
+    private String email;
+
+    public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email) {
         this.username = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.role = role;
         this.status = status;
+        this.email = email;
+    }
+
+    public User(String login, String name, String surname, UserRole role, UserStatus status, String email) {
+        this.username = login;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+        this.status = status;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -67,6 +79,10 @@ public class User {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public String toString() {
         return "User:" + " " + username + " " +
@@ -74,6 +90,7 @@ public class User {
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + " " +
                 "role:" + " " + role + " " +
-                "status:" + " " + status;
+                "status:" + " " + status +
+                "email:" + " " + email;
     }
 }

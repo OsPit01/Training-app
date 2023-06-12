@@ -7,7 +7,8 @@ public class UserValidator {
             return false;
         }
         if (user.getUsername() != null && user.getPassword() != null &&
-                user.getName() != null && user.getSurname() != null) {
+                user.getName() != null && user.getSurname() != null &&
+        user.getEmail() != null) {
             return true;
         }
         return false;

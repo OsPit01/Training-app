@@ -20,6 +20,7 @@ public class UserToStringConverter {
         joiner.add(user.getSurname());
         joiner.add(user.getRole().toString());
         joiner.add(user.getStatus().toString());
+        joiner.add(user.getEmail());
         return joiner.toString();
     }
 }

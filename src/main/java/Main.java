@@ -39,10 +39,11 @@ public class Main {
                 }
                 case CommandConstants.REGISTER_CODE -> {
                     System.out.println("Create your account");
-                    System.out.println("Your userName");
+                    System.out.println("Your username");
                     String inputUsername = scanner.nextLine();
-                    System.out.println("create password ");
-                    String inputPassword = scanner.nextLine();
+                    System.out.println("your email");
+
+                    String inputEmail = scanner.nextLine();
                     System.out.println("\ninput your name");
                     String inputName = scanner.nextLine();
                     System.out.println("\ninput your surname");
@@ -52,11 +53,11 @@ public class Main {
                     UserRole inputUserRole = UserRole.valueOf(inputRole.toUpperCase());
                     User user = new User(
                             inputUsername,
-                            inputPassword,
                             inputName,
                             inputSurname,
                             inputUserRole,
-                            UserStatus.ACTIVE
+                            UserStatus.ACTIVE,
+                            inputEmail
                     );
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.execute(user);
