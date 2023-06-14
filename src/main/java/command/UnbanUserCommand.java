@@ -6,9 +6,10 @@ import model.UserStatus;
 import repository.UserRepository;
 
 public class UnbanUserCommand {
+    private final UserRepository userRepository = new UserRepository();
 
     public void execute(String userName) throws UserNotFoundException {
-        User user = UserRepository.findUserByUsername(userName);
+        User user = userRepository.findUserByUsername(userName);
         user.setStatus(UserStatus.ACTIVE);
         System.out.println("user is active already");
     }

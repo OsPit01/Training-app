@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
@@ -16,10 +17,14 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final MenuPrinter menuPrinter = new MenuPrinter();
 
-    public static void init() {
+    private static final PrintUsersCommand printUserCommand = new PrintUsersCommand();
+
+    private static final UserRepository userRepository = new UserRepository();
+
+    public static void init() throws JsonProcessingException {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
-        UserRepository.saveAll(fileUsers);
+        userRepository.saveAll(fileUsers);
     }
 
     public static void main(String[] args) throws Exception {
@@ -83,7 +88,7 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        System.out.println(userService.getUsersInBan());
+                        printUserCommand.printFormatUsersToJson(userService.getUsersInBan());
                         System.out.println("write name of user for unban");
                         String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -94,7 +99,7 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        System.out.println(userService.getUsersInBan());
+                        printUserCommand.printFormatUsersToJson(userService.getUsersInBan());
                     }
                 }
                 case CommandConstants.CHANGE_PASSWORD -> {

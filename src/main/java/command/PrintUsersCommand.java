@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrintUsersCommand {
+    public UserRepository userRepository = new UserRepository();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void printFormatUsersToJson(List<User> user) throws PrintUserCommandException {
@@ -30,9 +31,9 @@ public class PrintUsersCommand {
 
         switch (currentRole) {
             case ADMIN -> usersByRole =
-                    UserRepository.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
-            case TRAINER -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINEE));
-            case TRAINEE -> usersByRole = UserRepository.findUsersByRole(List.of(UserRole.TRAINER));
+                    userRepository.findUsersByRole(List.of(UserRole.ADMIN, UserRole.TRAINEE, UserRole.TRAINER));
+            case TRAINER -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINEE));
+            case TRAINEE -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
         printFormatUsersToJson(usersByRole);
     }

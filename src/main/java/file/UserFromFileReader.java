@@ -16,6 +16,7 @@ public class UserFromFileReader {
     private final StringToUserConverter converter;
 
     public UserFromFileReader() {
+
         converter = new StringToUserConverter();
         try {
             scanner = new Scanner(new File(FILE_NAME));

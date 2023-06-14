@@ -12,7 +12,9 @@ public class User {
 
     private String email;
 
-    public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email) {
+    private String id;
+
+    public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email, String id) {
         this.username = login;
         this.password = password;
         this.name = name;
@@ -20,6 +22,7 @@ public class User {
         this.role = role;
         this.status = status;
         this.email = email;
+        this.id = id;
     }
 
     public User(String login, String name, String surname, UserRole role, UserStatus status, String email) {
@@ -59,9 +62,14 @@ public class User {
         return status;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public void setPassword(String password) {
         this.password = password;
@@ -79,6 +87,10 @@ public class User {
         this.role = role;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -91,6 +103,7 @@ public class User {
                 "surname:" + " " + surname + " " +
                 "role:" + " " + role + " " +
                 "status:" + " " + status +
-                "email:" + " " + email;
+                "email:" + " " + email +
+                "Id:" + " " + id;
     }
 }
