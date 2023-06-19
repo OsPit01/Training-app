@@ -15,7 +15,7 @@ public class PrintUsersCommand {
     public UserRepository userRepository = new UserRepository();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public void printFormatUsersToJson(List<User> user) throws PrintUserCommandException {
+    public void execute(List<User> user) throws PrintUserCommandException {
         String result;
         try {
             result = objectMapper.writeValueAsString(user);
@@ -35,6 +35,6 @@ public class PrintUsersCommand {
             case TRAINER -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINEE));
             case TRAINEE -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
-        printFormatUsersToJson(usersByRole);
+        execute(usersByRole);
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 public class User {
+
     private String username;
     private String password;
     private String name;
@@ -11,10 +12,9 @@ public class User {
     private UserStatus status;
 
     private String email;
+    private long id;
 
-    private String id;
-
-    public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email, String id) {
+    public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email,long id) {
         this.username = login;
         this.password = password;
         this.name = name;
@@ -25,13 +25,14 @@ public class User {
         this.id = id;
     }
 
-    public User(String login, String name, String surname, UserRole role, UserStatus status, String email) {
+    public User(String login, String name, String surname, UserRole role, UserStatus status, String email,long id) {
         this.username = login;
         this.name = name;
         this.surname = surname;
         this.role = role;
         this.status = status;
         this.email = email;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -62,7 +63,7 @@ public class User {
         return status;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -87,9 +88,6 @@ public class User {
         this.role = role;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -102,8 +100,8 @@ public class User {
                 "name:" + " " + name + " " +
                 "surname:" + " " + surname + " " +
                 "role:" + " " + role + " " +
-                "status:" + " " + status +
-                "email:" + " " + email +
+                "status:" + " " + status + " " +
+                "email:" + " " + email + " " +
                 "Id:" + " " + id;
     }
 }

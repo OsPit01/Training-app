@@ -5,7 +5,6 @@ import mail.PasswordGenerator;
 import model.User;
 import repository.UserRepository;
 import service.UserService;
-import ui.UserId;
 
 import javax.mail.MessagingException;
 
@@ -20,8 +19,6 @@ public class RegisterCommand {
         } else {
             String generatedPassword = passwordGenerator.getRandomPassword();
             user.setPassword(generatedPassword);
-            UserId commandSetId = new UserId();
-            commandSetId.setId(user);
             userRepository.save(user);
 
             MailSender mail = new MailSender();

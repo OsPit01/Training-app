@@ -21,7 +21,7 @@ public class UserToStringConverter {
         joiner.add(user.getRole().toString());
         joiner.add(user.getStatus().toString());
         joiner.add(user.getEmail());
-        joiner.add(user.getId());
+        joiner.add(String.valueOf(user.getId()));
         return joiner.toString();
     }
 }

@@ -12,5 +12,5 @@ public interface CommandConstants {
 
     int SHOW_USERS_IN_BAN = 0;
 
-    int CHANGE_PASSWORD = 99;
+    int CHANGE_PERSONAL_DATE = 99;
 }

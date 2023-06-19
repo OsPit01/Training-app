@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
 import command.*;
 import command.constant.CommandConstants;
 import file.UserFromFileReader;
@@ -21,7 +20,10 @@ public class Main {
 
     private static final UserRepository userRepository = new UserRepository();
 
-    public static void init() throws JsonProcessingException {
+    private static final ChangeDataCommand commandChange = new ChangeDataCommand();
+    private static long id = 1;
+
+    public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         userRepository.saveAll(fileUsers);
@@ -56,13 +58,18 @@ public class Main {
                     System.out.println("your role");
                     String inputRole = scanner.nextLine();
                     UserRole inputUserRole = UserRole.valueOf(inputRole.toUpperCase());
+                    int c = UserRepository.users.size();
+                    id -= id;
+                    ++id;
+                    id += c;
                     User user = new User(
                             inputUsername,
                             inputName,
                             inputSurname,
                             inputUserRole,
                             UserStatus.ACTIVE,
-                            inputEmail
+                            inputEmail,
+                            id
                     );
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.execute(user);
@@ -88,7 +95,7 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        printUserCommand.printFormatUsersToJson(userService.getUsersInBan());
+                        printUserCommand.execute(userService.getUsersInBan());
                         System.out.println("write name of user for unban");
                         String inputUsername = scanner.nextLine();
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
@@ -99,15 +106,34 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        printUserCommand.printFormatUsersToJson(userService.getUsersInBan());
+                        printUserCommand.execute(userService.getUsersInBan());
                     }
                 }
-                case CommandConstants.CHANGE_PASSWORD -> {
-                    System.out.println("input your new password");
-                    String password = scanner.nextLine();
-                    CommandChangePassword commandChangePassword = new CommandChangePassword();
-                    commandChangePassword.execute(password);
-                    System.out.println("password changed successfully");
+                case CommandConstants.CHANGE_PERSONAL_DATE -> {
+                    menuPrinter.print(UserSession.currentUser.getRole());
+                    int doChoice = Integer.parseInt(scanner.nextLine());
+                    switch (doChoice) {
+                        case 1 -> {
+                            System.out.println("input your new username");
+                            commandChange.changeUsername(scanner.nextLine());
+                            System.out.println("username changed successfully");
+                        }
+                        case 2 -> {
+                            System.out.println("input your new password");
+                            commandChange.changePassword(scanner.nextLine());
+                            System.out.println("password changed successfully");
+                        }
+                        case 3 -> {
+                            System.out.println("input your new name");
+                            commandChange.changeName(scanner.nextLine());
+                            System.out.println("name changed successfully");
+                        }
+                        case 4 -> {
+                            System.out.println("input your new surname");
+                            commandChange.changeName(scanner.nextLine());
+                            System.out.println("surname changed successfully");
+                        }
+                    }
                 }
             }
         }

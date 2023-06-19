@@ -7,6 +7,8 @@ import repository.UserRepository;
 import java.util.List;
 
 public class ExitCommand {
+    static long id;
+
     public void execute() {
         UserToFileWriter userToFileWriter = new UserToFileWriter();
         List<User> userRepository = new UserRepository().getUsers();
