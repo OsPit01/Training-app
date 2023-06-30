@@ -37,8 +37,8 @@ public class StringToUserConverterTest {
                 "rbIba-gold",
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
-                "email"
-        );
+                "email",
+                id);
 
         User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin=active=email");
 
@@ -58,9 +58,9 @@ public class StringToUserConverterTest {
                 "pushkin aleksandr lol",
                 UserRole.ADMIN,
                 UserStatus.BAN,
-                "email"
+                "email",
 
-        );
+                id);
 
         User actual = stringToUserConverter.convert(
                 "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin=ban"
@@ -82,7 +82,7 @@ public class StringToUserConverterTest {
                 "osipov",
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
-                "email");
+                "email", id);
 
         User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin=active");
 

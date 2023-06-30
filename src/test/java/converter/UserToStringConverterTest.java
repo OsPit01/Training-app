@@ -36,7 +36,7 @@ public class UserToStringConverterTest {
                 "osipov",
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
-        "email");
+        "email", id);
 
         String actual = userToStringConverter.convert(user);
 

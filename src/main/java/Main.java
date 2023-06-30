@@ -1,6 +1,9 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import command.*;
 import command.constant.CommandConstants;
+import converter.JsonToUserConverter;
 import file.UserFromFileReader;
+import file.UserToFileWriter;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
@@ -21,12 +24,16 @@ public class Main {
     private static final UserRepository userRepository = new UserRepository();
 
     private static final ChangeDataCommand commandChange = new ChangeDataCommand();
-    private static long id = 1;
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    private static final UserService userService = new UserService();
 
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         userRepository.saveAll(fileUsers);
+        User.setCounter(userService.getId());
     }
 
     public static void main(String[] args) throws Exception {
@@ -58,18 +65,13 @@ public class Main {
                     System.out.println("your role");
                     String inputRole = scanner.nextLine();
                     UserRole inputUserRole = UserRole.valueOf(inputRole.toUpperCase());
-                    int c = UserRepository.users.size();
-                    id -= id;
-                    ++id;
-                    id += c;
                     User user = new User(
                             inputUsername,
                             inputName,
                             inputSurname,
                             inputUserRole,
                             UserStatus.ACTIVE,
-                            inputEmail,
-                            id
+                            inputEmail
                     );
                     RegisterCommand registerCommand = new RegisterCommand();
                     registerCommand.execute(user);
@@ -109,31 +111,21 @@ public class Main {
                         printUserCommand.execute(userService.getUsersInBan());
                     }
                 }
-                case CommandConstants.CHANGE_PERSONAL_DATE -> {
-                    menuPrinter.print(UserSession.currentUser.getRole());
-                    int doChoice = Integer.parseInt(scanner.nextLine());
-                    switch (doChoice) {
-                        case 1 -> {
-                            System.out.println("input your new username");
-                            commandChange.changeUsername(scanner.nextLine());
-                            System.out.println("username changed successfully");
-                        }
-                        case 2 -> {
-                            System.out.println("input your new password");
-                            commandChange.changePassword(scanner.nextLine());
-                            System.out.println("password changed successfully");
-                        }
-                        case 3 -> {
-                            System.out.println("input your new name");
-                            commandChange.changeName(scanner.nextLine());
-                            System.out.println("name changed successfully");
-                        }
-                        case 4 -> {
-                            System.out.println("input your new surname");
-                            commandChange.changeName(scanner.nextLine());
-                            System.out.println("surname changed successfully");
-                        }
-                    }
+                case CommandConstants.CHANGE_PERSONAL_DATA -> {
+                    UserToFileWriter userToFileWriter = new UserToFileWriter();
+                    userToFileWriter.writeUserInJsonFormatToFile(UserSession.currentUser);
+
+                    System.out.println("\ninput new user");
+                    JsonToUserConverter jsonToUserConverter = new JsonToUserConverter();
+
+                    User user = jsonToUserConverter.convert(scanner.nextLine());
+                    System.out.println(user);
+                    User currentUser = userRepository.findUserById(user.getId());
+
+                    currentUser.setSurname(user.getSurname());
+                    currentUser.setPassword(user.getPassword());
+                    currentUser.setName(user.getName());
+                    currentUser.setUsername(user.getUsername());
                 }
             }
         }

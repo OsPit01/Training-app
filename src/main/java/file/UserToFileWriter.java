@@ -1,9 +1,11 @@
 package file;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import converter.UserToStringConverter;
 import exception.FileWriterException;
 import model.User;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +13,12 @@ import java.util.List;
 public class UserToFileWriter {
 
     private static final String FILE_NAME = "Information_about_users";
+
+    private static final String FILE_JSON = "JsonFile";
     private static final String LINE_SEPARATOR = "\n";
     private final UserToStringConverter userToStringConverter;
     private final FileWriter writer;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public UserToFileWriter() {
         userToStringConverter = new UserToStringConverter();
@@ -54,5 +59,11 @@ public class UserToFileWriter {
                 throw new FileWriterException(e);
             }
         }
+    }
+
+    public void writeUserInJsonFormatToFile(User user) throws IOException {
+        System.out.println("process write to JsonFile ");
+        System.out.println(objectMapper.writeValueAsString(user));
+        objectMapper.writeValue(new File(FILE_JSON), user);
     }
 }

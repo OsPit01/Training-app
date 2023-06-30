@@ -4,16 +4,8 @@ package command;
 import repository.UserSession;
 
 public class ChangeDataCommand {
-    public void changePassword(String inputPassword) {
-        UserSession.currentUser.setPassword(inputPassword);
-    }
+    public void changeCurrentUser(String username,String password,String surname) {
 
-    public void changeInputSurname(String inputSurname) {
-        UserSession.currentUser.setSurname(inputSurname);
-    }
-
-    public void changeUsername(String inputUsername) {
-        UserSession.currentUser.setUsername(inputUsername);
     }
 
     public void changeRole(String inputRole) {

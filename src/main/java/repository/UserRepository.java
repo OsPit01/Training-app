@@ -65,4 +65,13 @@ public class UserRepository {
         }
         return result;
     }
+
+    public User findUserById(long id) throws UserNotFoundException {
+        for (User user:users) {
+            if (id == user.getId()) {
+              return user;
+            }
+        }
+        throw new UserNotFoundException();
+    }
 }
