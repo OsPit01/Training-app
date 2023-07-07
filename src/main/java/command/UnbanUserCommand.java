@@ -8,8 +8,8 @@ import repository.UserRepository;
 public class UnbanUserCommand {
     private final UserRepository userRepository = new UserRepository();
 
-    public void execute(String userName) throws UserNotFoundException {
-        User user = userRepository.findUserByUsername(userName);
+    public void execute(long id) throws UserNotFoundException {
+        User user = userRepository.findUserById(id);
         user.setStatus(UserStatus.ACTIVE);
         System.out.println("user is active already");
     }

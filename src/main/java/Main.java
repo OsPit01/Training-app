@@ -1,9 +1,7 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
 import command.*;
 import command.constant.CommandConstants;
 import converter.JsonToUserConverter;
 import file.UserFromFileReader;
-import file.UserToFileWriter;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
@@ -17,23 +15,21 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+
     private static final MenuPrinter menuPrinter = new MenuPrinter();
 
     private static final PrintUsersCommand printUserCommand = new PrintUsersCommand();
 
     private static final UserRepository userRepository = new UserRepository();
 
-    private static final ChangeDataCommand commandChange = new ChangeDataCommand();
+    private static final JsonToUserConverter jsonToUserConverter = new JsonToUserConverter();
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    private static final UserService userService = new UserService();
 
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         userRepository.saveAll(fileUsers);
-        User.setCounter(userService.getId());
+        User.setCounter(userRepository.findAll());
     }
 
     public static void main(String[] args) throws Exception {
@@ -81,16 +77,16 @@ public class Main {
                     exitCommand.execute();
                 }
                 case CommandConstants.SHOW_ME_LIST_CODE -> {
-                    PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.execute();
+                    ShowMeListCommand showMeListCommand = new ShowMeListCommand();
+                    showMeListCommand.execute();
                 }
                 case CommandConstants.BAN_USER -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
-                        System.out.println("write name of user for ban");
-                        String inputUsername = scanner.nextLine();
+                        System.out.println("write id of user for ban");
+                        long id = Integer.parseInt(scanner.nextLine());
                         BanUsersCommand banUsersCommand = new BanUsersCommand();
-                        banUsersCommand.execute(inputUsername);
+                        banUsersCommand.execute(id);
                     }
                 }
                 case CommandConstants.UNBAN -> {
@@ -98,10 +94,10 @@ public class Main {
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
                         printUserCommand.execute(userService.getUsersInBan());
-                        System.out.println("write name of user for unban");
-                        String inputUsername = scanner.nextLine();
+                        System.out.println("write id of user for unban");
+                        long id  = Integer.parseInt(scanner.nextLine());
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
-                        unbanUserCommand.execute(inputUsername);
+                        unbanUserCommand.execute(id);
                     }
                 }
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
@@ -111,21 +107,14 @@ public class Main {
                         printUserCommand.execute(userService.getUsersInBan());
                     }
                 }
-                case CommandConstants.CHANGE_PERSONAL_DATA -> {
-                    UserToFileWriter userToFileWriter = new UserToFileWriter();
-                    userToFileWriter.writeUserInJsonFormatToFile(UserSession.currentUser);
-
+                case CommandConstants.UPDATE_USER_COMMAND -> {
                     System.out.println("\ninput new user");
-                    JsonToUserConverter jsonToUserConverter = new JsonToUserConverter();
 
                     User user = jsonToUserConverter.convert(scanner.nextLine());
                     System.out.println(user);
-                    User currentUser = userRepository.findUserById(user.getId());
 
-                    currentUser.setSurname(user.getSurname());
-                    currentUser.setPassword(user.getPassword());
-                    currentUser.setName(user.getName());
-                    currentUser.setUsername(user.getUsername());
+                    UpdateUserCommand updateUserCommand = new UpdateUserCommand();
+                    updateUserCommand.execute(user);
                 }
             }
         }

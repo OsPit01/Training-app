@@ -87,7 +87,6 @@ public class User {
         return id;
     }
 
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -108,7 +107,6 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
-
 
     @Override
     public String toString() {

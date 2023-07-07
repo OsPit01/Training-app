@@ -5,7 +5,6 @@ import converter.UserToStringConverter;
 import exception.FileWriterException;
 import model.User;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -59,11 +58,5 @@ public class UserToFileWriter {
                 throw new FileWriterException(e);
             }
         }
-    }
-
-    public void writeUserInJsonFormatToFile(User user) throws IOException {
-        System.out.println("process write to JsonFile ");
-        System.out.println(objectMapper.writeValueAsString(user));
-        objectMapper.writeValue(new File(FILE_JSON), user);
     }
 }

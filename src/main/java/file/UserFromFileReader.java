@@ -3,8 +3,6 @@ package file;
 import converter.StringToUserConverter;
 import exception.FileReaderException;
 import model.User;
-import model.UserRole;
-import model.UserStatus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +16,6 @@ public class UserFromFileReader {
     private final StringToUserConverter converter;
 
     public UserFromFileReader() {
-
         converter = new StringToUserConverter();
         try {
             scanner = new Scanner(new File(FILE_NAME));
@@ -36,25 +33,5 @@ public class UserFromFileReader {
             users.add(user);
         }
         return users;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("SECOND MAIN");
-        ArrayList<User> users = new ArrayList<>();
-        UserFromFileReader userFromFileReader = new UserFromFileReader();
-
-        System.out.println("READING FROM FILE");
-        List<User> receiveUsers = userFromFileReader.read();
-        System.out.println(receiveUsers);
-        User user3 = new User("dad3", "dodik3", "dacik4", UserRole.TRAINEE,
-                UserStatus.ACTIVE, "lovejudo96@mail.ru");
-
-        System.out.println("DOING WRITE IN FILE");
-
-        users.add(receiveUsers.get(0));
-        users.add(receiveUsers.get(1));
-        users.add(user3);
-        UserToFileWriter userToFileWriter = new UserToFileWriter();
-        userToFileWriter.write(users);
     }
 }

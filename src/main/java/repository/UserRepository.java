@@ -10,8 +10,7 @@ import java.util.List;
 
 public class UserRepository {
 
-
-    public static List<User> users = new ArrayList<>();
+   private static List<User> users = new ArrayList<>();
 
     public List<User> getUsers() {
         return users;
@@ -73,5 +72,16 @@ public class UserRepository {
             }
         }
         throw new UserNotFoundException();
+    }
+    public long findAll() {
+        long result = 0;
+
+        for (User user : users) {
+            long currentId = user.getId();
+            if (currentId > result) {
+                result = currentId;
+            }
+        }
+        return result;
     }
 }

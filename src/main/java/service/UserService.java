@@ -9,7 +9,6 @@ import repository.UserSession;
 
 import java.util.List;
 
-import static repository.UserRepository.users;
 
 public class UserService {
     private final UserRepository userRepository = new UserRepository();
@@ -44,19 +43,4 @@ public class UserService {
     public List<User> getUsersInBan() {
         return userRepository.findUsersByStatus(UserStatus.BAN);
     }
-
-    public long getId() {
-        long result = 0;
-
-        for (User user : users) {
-            long currentId = user.getId();
-            if (currentId > result) {
-                result = currentId;
-            }
-        }
-        return result;
-    }
-
-
 }
-

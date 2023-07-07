@@ -7,9 +7,9 @@ import model.UserStatus;
 import repository.UserRepository;
 
 public class BanUsersCommand {
- public UserRepository userRepository = new UserRepository();
-    public void execute(String userName) throws UserNotFoundException {
-        User user = userRepository.findUserByUsername(userName);
+ private final UserRepository userRepository = new UserRepository();
+    public void execute(long id) throws UserNotFoundException {
+        User user = userRepository.findUserById(id);
 
         if (UserRole.ADMIN == user.getRole()) {
             System.out.println("this is Admin");
