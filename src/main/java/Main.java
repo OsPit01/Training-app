@@ -18,8 +18,6 @@ public class Main {
 
     private static final MenuPrinter menuPrinter = new MenuPrinter();
 
-    private static final PrintUsersCommand printUserCommand = new PrintUsersCommand();
-
     private static final UserRepository userRepository = new UserRepository();
 
     private static final JsonToUserConverter jsonToUserConverter = new JsonToUserConverter();
@@ -93,9 +91,10 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        printUserCommand.execute(userService.getUsersInBan());
+                        PrintUsersCommand printUsersCommand = new PrintUsersCommand();
+                        printUsersCommand.execute(userService.getUsersInBan());
                         System.out.println("write id of user for unban");
-                        long id  = Integer.parseInt(scanner.nextLine());
+                        long id = Integer.parseInt(scanner.nextLine());
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
                         unbanUserCommand.execute(id);
                     }
@@ -104,7 +103,8 @@ public class Main {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        printUserCommand.execute(userService.getUsersInBan());
+                        PrintUsersCommand printUsersCommand = new PrintUsersCommand();
+                        printUsersCommand.execute(userService.getUsersInBan());
                     }
                 }
                 case CommandConstants.UPDATE_USER_COMMAND -> {

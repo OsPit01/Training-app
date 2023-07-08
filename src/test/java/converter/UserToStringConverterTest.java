@@ -3,13 +3,11 @@ package converter;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@Ignore
 public class UserToStringConverterTest {
 
     private final UserToStringConverter userToStringConverter = new UserToStringConverter();
@@ -28,7 +26,7 @@ public class UserToStringConverterTest {
 
     @Test
     public void testConvert() {
-        String expected = "igor=igor_password=ihar=osipov=ADMIN=ACTIVE";
+        String expected = "igor=igor_password=ihar=osipov=ADMIN=ACTIVE=email=1";
         User user = new User(
                 "igor",
                 "igor_password",
@@ -36,7 +34,7 @@ public class UserToStringConverterTest {
                 "osipov",
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
-        "email", id);
+                "email", 1);
 
         String actual = userToStringConverter.convert(user);
 

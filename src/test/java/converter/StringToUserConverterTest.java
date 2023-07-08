@@ -3,13 +3,11 @@ package converter;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@Ignore
 public class StringToUserConverterTest {
     private final StringToUserConverter stringToUserConverter = new StringToUserConverter();
 
@@ -38,9 +36,9 @@ public class StringToUserConverterTest {
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
                 "email",
-                id);
+                1);
 
-        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin=active=email");
+        User actual = stringToUserConverter.convert("vany-kaka=dimon-maradona=Van-Clock-Dimon=rbIba-gold=admin=active=email=1");
 
         assertNotNull(actual);
         assertEquals(expected.getName(), actual.getName());
@@ -60,10 +58,10 @@ public class StringToUserConverterTest {
                 UserStatus.BAN,
                 "email",
 
-                id);
+                1);
 
         User actual = stringToUserConverter.convert(
-                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin=ban"
+                "serega three zero=vany short boy=Van Clock Vandam=pushkin aleksandr lol=admin=ban=email=1"
         );
 
         assertNotNull(actual);
@@ -73,7 +71,6 @@ public class StringToUserConverterTest {
         assertEquals(expected.getUsername(), actual.getUsername());
     }
 
-    @Test
     public void testConvert() {
         User expected = new User(
                 "Oss",
@@ -82,9 +79,9 @@ public class StringToUserConverterTest {
                 "osipov",
                 UserRole.ADMIN,
                 UserStatus.ACTIVE,
-                "email", id);
+                "email", 1);
 
-        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin=active");
+        User actual = stringToUserConverter.convert("Oss=oss_password=igor=osipov=admin=active=email=1");
 
         assertNotNull(actual);
         assertEquals(expected.getUsername(), actual.getUsername());
