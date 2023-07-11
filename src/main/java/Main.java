@@ -27,7 +27,7 @@ public class Main {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         userRepository.saveAll(fileUsers);
-        User.setCounter(userRepository.findAll());
+        User.setCounter(userRepository.finaLastId());
     }
 
     public static void main(String[] args) throws Exception {
@@ -102,9 +102,8 @@ public class Main {
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
-                        UserService userService = new UserService();
-                        PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                        printUsersCommand.execute(userService.getUsersInBan());
+                        PrintUsersInBanCommand printUsersInBanCommand = new PrintUsersInBanCommand();
+                        printUsersInBanCommand.printUsersInBan();
                     }
                 }
                 case CommandConstants.UPDATE_USER_COMMAND -> {

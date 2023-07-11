@@ -1,17 +1,14 @@
 package command;
 
 import file.UserToFileWriter;
-import model.User;
-import repository.UserRepository;
-
-import java.util.List;
+import service.UserService;
 
 public class ExitCommand {
+    private final UserService userService = new UserService();
 
     public void execute() {
         UserToFileWriter userToFileWriter = new UserToFileWriter();
-        List<User> listUsers = new UserRepository().getUsers();
-        userToFileWriter.write(listUsers);
+        userToFileWriter.write(userService.getAllUsers());
 
         System.exit(0);
     }

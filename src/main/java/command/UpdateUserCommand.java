@@ -2,17 +2,16 @@ package command;
 
 import exception.UserNotFoundException;
 import model.User;
-import repository.UserRepository;
+import service.UserService;
 
 public class UpdateUserCommand {
-    private final UserRepository userRepository = new UserRepository();
+    private final UserService userService = new UserService();
 
     public void execute(User user) throws UserNotFoundException {
         System.out.println("\ninput new user");
         System.out.println(user);
 
-        User currentUser = userRepository.findUserById(user.getId());
-
+        User currentUser = userService.getUserById(user.getId());
         currentUser.setSurname(user.getSurname());
         currentUser.setPassword(user.getPassword());
         currentUser.setName(user.getName());

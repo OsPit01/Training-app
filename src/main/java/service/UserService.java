@@ -43,4 +43,17 @@ public class UserService {
     public List<User> getUsersInBan() {
         return userRepository.findUsersByStatus(UserStatus.BAN);
     }
+
+    public User getUserById(long id) throws UserNotFoundException {
+        User currentUser = userRepository.findUserById(id);
+        return currentUser;
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return UserRepository.getUsers();
+    }
 }

@@ -1,7 +1,7 @@
 package model;
 
 public class User {
-
+    private static long counter = 1;
     private String username;
     private String password;
     private String name;
@@ -12,8 +12,6 @@ public class User {
     private UserStatus status;
 
     private String email;
-
-    private static long counter = 1;
 
     private long id;
 

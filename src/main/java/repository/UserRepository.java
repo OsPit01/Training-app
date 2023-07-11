@@ -10,9 +10,9 @@ import java.util.List;
 
 public class UserRepository {
 
-   private static List<User> users = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
 
-    public List<User> getUsers() {
+    public static List<User> getUsers() {
         return users;
     }
 
@@ -66,14 +66,15 @@ public class UserRepository {
     }
 
     public User findUserById(long id) throws UserNotFoundException {
-        for (User user:users) {
+        for (User user : users) {
             if (id == user.getId()) {
-              return user;
+                return user;
             }
         }
         throw new UserNotFoundException();
     }
-    public long findAll() {
+
+    public long finaLastId() {
         long result = 0;
 
         for (User user : users) {

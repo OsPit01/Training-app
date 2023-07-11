@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class JsonToUserConverter {
 
-    ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     public User convert(String line) throws IOException {
 

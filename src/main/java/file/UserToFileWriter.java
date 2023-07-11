@@ -1,6 +1,5 @@
 package file;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import converter.UserToStringConverter;
 import exception.FileWriterException;
 import model.User;
@@ -17,7 +16,6 @@ public class UserToFileWriter {
     private static final String LINE_SEPARATOR = "\n";
     private final UserToStringConverter userToStringConverter;
     private final FileWriter writer;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public UserToFileWriter() {
         userToStringConverter = new UserToStringConverter();
