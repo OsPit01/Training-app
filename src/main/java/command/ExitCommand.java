@@ -1,12 +1,14 @@
 package command;
 
 import file.UserToFileWriter;
-import repository.UserRepository;
+import service.UserService;
 
 public class ExitCommand {
+    private final UserService userService = new UserService();
+
     public void execute() {
         UserToFileWriter userToFileWriter = new UserToFileWriter();
-        userToFileWriter.write(UserRepository.getUsers());
+        userToFileWriter.write(userService.getAllUsers());
 
         System.exit(0);
     }

@@ -1,5 +1,6 @@
 import command.*;
 import command.constant.CommandConstants;
+import converter.JsonToUserConverter;
 import file.UserFromFileReader;
 import model.User;
 import model.UserRole;
@@ -14,12 +15,19 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+
     private static final MenuPrinter menuPrinter = new MenuPrinter();
+
+    private static final UserRepository userRepository = new UserRepository();
+
+    private static final JsonToUserConverter jsonToUserConverter = new JsonToUserConverter();
+
 
     public static void init() {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
-        UserRepository.saveAll(fileUsers);
+        userRepository.saveAll(fileUsers);
+        User.setCounter(userRepository.findLastId());
     }
 
     public static void main(String[] args) throws Exception {
@@ -67,35 +75,45 @@ public class Main {
                     exitCommand.execute();
                 }
                 case CommandConstants.SHOW_ME_LIST_CODE -> {
-                    PrintUsersCommand printUsersCommand = new PrintUsersCommand();
-                    printUsersCommand.execute();
+                    ShowMeListCommand showMeListCommand = new ShowMeListCommand();
+                    showMeListCommand.execute();
                 }
                 case CommandConstants.BAN_USER -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
-                        System.out.println("write name of user for ban");
-                        String inputUsername = scanner.nextLine();
+                        System.out.println("write id of user for ban");
+                        long id = Integer.parseInt(scanner.nextLine());
                         BanUsersCommand banUsersCommand = new BanUsersCommand();
-                        banUsersCommand.execute(inputUsername);
+                        banUsersCommand.execute(id);
                     }
                 }
                 case CommandConstants.UNBAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
                         UserService userService = new UserService();
-                        System.out.println(userService.getUsersInBan());
-                        System.out.println("write name of user for unban");
-                        String inputUsername = scanner.nextLine();
+                        PrintUsersCommand printUsersCommand = new PrintUsersCommand();
+                        printUsersCommand.execute(userService.getUsersInBan());
+                        System.out.println("write id of user for unban");
+                        long id = Integer.parseInt(scanner.nextLine());
                         UnbanUserCommand unbanUserCommand = new UnbanUserCommand();
-                        unbanUserCommand.execute(inputUsername);
+                        unbanUserCommand.execute(id);
                     }
                 }
                 case CommandConstants.SHOW_USERS_IN_BAN -> {
                     UserRole currentRole = UserSession.currentUser.getRole();
                     if (UserRole.ADMIN == currentRole) {
-                        UserService userService = new UserService();
-                        System.out.println(userService.getUsersInBan());
+                        PrintUsersInBanCommand printUsersInBanCommand = new PrintUsersInBanCommand();
+                        printUsersInBanCommand.printUsersInBan();
                     }
+                }
+                case CommandConstants.UPDATE_USER_COMMAND -> {
+                    System.out.println("\ninput new user");
+
+                    User user = jsonToUserConverter.convert(scanner.nextLine());
+                    System.out.println(user);
+
+                    UpdateUserCommand updateUserCommand = new UpdateUserCommand();
+                    updateUserCommand.execute(user);
                 }
             }
         }

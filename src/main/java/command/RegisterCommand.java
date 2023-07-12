@@ -3,7 +3,6 @@ package command;
 import mail.MailSender;
 import mail.PasswordGenerator;
 import model.User;
-import repository.UserRepository;
 import service.UserService;
 
 import javax.mail.MessagingException;
@@ -18,7 +17,7 @@ public class RegisterCommand {
         } else {
             String generatedPassword = passwordGenerator.getRandomPassword();
             user.setPassword(generatedPassword);
-            UserRepository.save(user);
+            userService.saveUser(user);
 
             MailSender mail = new MailSender();
             mail.sendEmail(user.getEmail(), user.getPassword());

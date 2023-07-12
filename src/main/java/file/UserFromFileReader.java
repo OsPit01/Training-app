@@ -26,6 +26,7 @@ public class UserFromFileReader {
 
     public List<User> read() {
         List<User> users = new ArrayList<>();
+
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             User user = converter.convert(line);

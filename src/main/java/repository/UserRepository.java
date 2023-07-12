@@ -10,21 +10,21 @@ import java.util.List;
 
 public class UserRepository {
 
-    private static final List<User> users = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
 
     public static List<User> getUsers() {
         return users;
     }
 
-    public static void save(User user) {
+    public void save(User user) {
         users.add(user);
     }
 
-    public static void saveAll(List<User> inputUsers) {
+    public void saveAll(List<User> inputUsers) {
         users.addAll(inputUsers);
     }
 
-    public static User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException {
+    public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException {
 
         for (User user : users) {
             if (user.getUsername().equals(username)
@@ -35,7 +35,7 @@ public class UserRepository {
         throw new UserNotFoundException();
     }
 
-    public static User findUserByUsername(String username) throws UserNotFoundException {
+    public User findUserByUsername(String username) throws UserNotFoundException {
 
         for (User user : users) {
             if (user.getUsername().equals(username)) {
@@ -45,7 +45,7 @@ public class UserRepository {
         throw new UserNotFoundException();
     }
 
-    public static List<User> findUsersByRole(List<UserRole> roles) {
+    public List<User> findUsersByRole(List<UserRole> roles) {
         List<User> result = new ArrayList<>();
         for (User user : users) {
             if (roles.contains(user.getRole())) {
@@ -55,11 +55,32 @@ public class UserRepository {
         return result;
     }
 
-    public static List<User> findUsersByStatus(UserStatus status) {
+    public List<User> findUsersByStatus(UserStatus status) {
         List<User> result = new ArrayList<>();
         for (User user : users) {
             if (status == user.getStatus()) {
                 result.add(user);
+            }
+        }
+        return result;
+    }
+
+    public User findUserById(long id) throws UserNotFoundException {
+        for (User user : users) {
+            if (id == user.getId()) {
+                return user;
+            }
+        }
+        throw new UserNotFoundException();
+    }
+
+    public long findLastId() {
+        long result = 0;
+
+        for (User user : users) {
+            long currentId = user.getId();
+            if (currentId > result) {
+                result = currentId;
             }
         }
         return result;
