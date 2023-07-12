@@ -12,7 +12,6 @@ public class UserToFileWriter {
 
     private static final String FILE_NAME = "Information_about_users";
 
-    private static final String FILE_JSON = "JsonFile";
     private static final String LINE_SEPARATOR = "\n";
     private final UserToStringConverter userToStringConverter;
     private final FileWriter writer;

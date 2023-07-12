@@ -27,7 +27,7 @@ public class Main {
         UserFromFileReader fileReader = new UserFromFileReader();
         List<User> fileUsers = fileReader.read();
         userRepository.saveAll(fileUsers);
-        User.setCounter(userRepository.finaLastId());
+        User.setCounter(userRepository.findLastId());
     }
 
     public static void main(String[] args) throws Exception {

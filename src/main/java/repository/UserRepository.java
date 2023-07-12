@@ -74,7 +74,7 @@ public class UserRepository {
         throw new UserNotFoundException();
     }
 
-    public long finaLastId() {
+    public long findLastId() {
         long result = 0;
 
         for (User user : users) {

@@ -9,7 +9,6 @@ import repository.UserSession;
 
 import java.util.List;
 
-
 public class UserService {
     private final UserRepository userRepository = new UserRepository();
 
