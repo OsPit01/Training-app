@@ -16,7 +16,8 @@ public class User {
     private long id;
 
     public User() {
-
+        this.setStatus(UserStatus.ACTIVE);
+        this.id = ++counter;
     }
 
     public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email, long id) {
@@ -106,6 +107,9 @@ public class User {
         this.role = role;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
     @Override
     public String toString() {
         return "User:" + " " + username + " " +
