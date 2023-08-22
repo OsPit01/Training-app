@@ -23,6 +23,6 @@ public class ShowMeListCommand {
             case TRAINEE -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
         new PrintUsersCommand().execute(usersByRole);
-        return null;
+        return "";
     }
 }
