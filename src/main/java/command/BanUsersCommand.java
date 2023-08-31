@@ -4,7 +4,7 @@ import exception.UserNotFoundException;
 import model.User;
 import model.UserRole;
 import model.UserStatus;
-import repository.service.UserService;
+import service.UserService;
 
 public class BanUsersCommand {
     private final UserService userService = new UserService();

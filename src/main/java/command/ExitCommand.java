@@ -1,7 +1,7 @@
 package command;
 
 import file.UserToFileWriter;
-import repository.service.UserService;
+import service.UserService;
 
 public class ExitCommand {
     private final UserService userService = new UserService();

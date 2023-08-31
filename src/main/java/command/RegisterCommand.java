@@ -3,7 +3,7 @@ package command;
 import mail.MailSender;
 import mail.PasswordGenerator;
 import model.User;
-import repository.service.UserService;
+import service.UserService;
 
 import javax.mail.MessagingException;
 

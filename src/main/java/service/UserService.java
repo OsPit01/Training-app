@@ -1,4 +1,4 @@
-package repository.service;
+package service;
 
 import exception.LoginException;
 import exception.UserNotFoundException;

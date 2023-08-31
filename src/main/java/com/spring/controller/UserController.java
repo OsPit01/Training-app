@@ -6,8 +6,7 @@ import model.UserStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
-import repository.service.UserService;
+import service.UserService;
 
 import java.util.List;
 
@@ -22,14 +21,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/users/userLastId", method = RequestMethod.GET)
-    public long getLastId() {
-        return new UserRepository().findLastId();
-    }
-
-    @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
-    public User getUserId(@PathVariable long id) throws UserNotFoundException {
-        return userService.getUserById(id);
+    @RequestMapping(value = "/users/{getUserById}", method = RequestMethod.GET)
+    public ResponseEntity<Void> getUserId(@PathVariable long id) {
+        try {
+            User user = userService.getUserById(id);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
@@ -41,7 +40,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "users/updateUser/{id}", method = RequestMethod.PUT)
-
     public ResponseEntity<Void> updateUser(@PathVariable long id, @RequestBody User update) {
 
         try {
@@ -58,16 +56,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "users/{banUserById}", method = RequestMethod.GET)
-    public ResponseEntity<Void> banUser(@PathVariable long id) throws UserNotFoundException {
-        User user = new UserService().getUserById(id);
-        user.setStatus(UserStatus.BAN);
+    public ResponseEntity<Void> banUser(@PathVariable long id) {
+        try {
+            User user = new UserService().getUserById(id);
+            user.setStatus(UserStatus.BAN);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "users/{unbanUserById}", method = RequestMethod.GET)
-    public ResponseEntity<Void> unbanUser(@PathVariable long id) throws UserNotFoundException {
-        User user = new UserService().getUserById(id);
-        user.setStatus(UserStatus.ACTIVE);
+    public ResponseEntity<Void> unbanUser(@PathVariable long id) {
+        try {
+            User user = new UserService().getUserById(id);
+            user.setStatus(UserStatus.ACTIVE);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

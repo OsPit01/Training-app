@@ -2,7 +2,7 @@ package command;
 
 import exception.LoginCommandException;
 import exception.LoginException;
-import repository.service.UserService;
+import service.UserService;
 
 public class LoginCommand {
     private final UserService userService = new UserService();

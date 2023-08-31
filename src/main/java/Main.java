@@ -7,7 +7,7 @@ import model.UserRole;
 import model.UserStatus;
 import repository.UserRepository;
 import repository.UserSession;
-import repository.service.UserService;
+import service.UserService;
 import ui.MenuPrinter;
 
 import java.util.List;

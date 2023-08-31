@@ -2,7 +2,7 @@ package command;
 
 import exception.UserNotFoundException;
 import model.User;
-import repository.service.UserService;
+import service.UserService;
 
 public class UpdateUserCommand {
     private final UserService userService = new UserService();
