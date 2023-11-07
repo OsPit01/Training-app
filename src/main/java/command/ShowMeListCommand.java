@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowMeListCommand {
-   private final UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public void execute() throws PrintUserCommandException {
         UserRole currentRole = UserSession.currentUser.getRole();

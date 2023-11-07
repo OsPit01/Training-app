@@ -6,17 +6,14 @@ public class User {
     private String password;
     private String name;
     private String surname;
-
     private UserRole role;
-
     private UserStatus status;
-
     private String email;
-
     private long id;
 
     public User() {
-
+        this.status = UserStatus.ACTIVE;
+        this.id = ++counter;
     }
 
     public User(String login, String password, String name, String surname, UserRole role, UserStatus status, String email, long id) {
@@ -29,7 +26,6 @@ public class User {
         this.email = email;
         this.id = id;
     }
-
 
     public User(String login, String name, String surname, UserRole role, UserStatus status, String email) {
         this.username = login;
@@ -104,6 +100,10 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
