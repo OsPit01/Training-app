@@ -12,7 +12,7 @@ import java.util.List;
 public class ShowMeListCommand {
     private final UserRepository userRepository = new UserRepository();
 
-    public String execute() throws PrintUserCommandException {
+    public void execute() throws PrintUserCommandException {
         UserRole currentRole = UserSession.currentUser.getRole();
         List<User> usersByRole = new ArrayList<>();
 
@@ -23,6 +23,5 @@ public class ShowMeListCommand {
             case TRAINEE -> usersByRole = userRepository.findUsersByRole(List.of(UserRole.TRAINER));
         }
         new PrintUsersCommand().execute(usersByRole);
-        return "";
     }
 }

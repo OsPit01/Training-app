@@ -11,27 +11,28 @@ import service.UserService;
 import java.util.List;
 
 @RestController
-@ResponseBody
 public class UserController {
 
     private final UserService userService = new UserService();
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+   @GetMapping(value = "/users")
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/users/{getUserById}", method = RequestMethod.GET)
-    public ResponseEntity<Void> getUserId(@PathVariable long id) {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUserId(@PathVariable long id) {
+        User user;
         try {
-            User user = userService.getUserById(id);
+            user = new UserService().getUserById(id);
+
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "/users/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<Void> saveUser(@RequestBody User user) {
         user.setStatus(UserStatus.ACTIVE);
         userService.saveUser(user);
@@ -49,13 +50,14 @@ public class UserController {
             user.setName(update.getName());
             user.setSurname(update.getSurname());
             user.setEmail(update.getEmail());
-        } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+         catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "users/{banUserById}", method = RequestMethod.GET)
+    @RequestMapping(value = "users/ban/{id}", method = RequestMethod.GET)
     public ResponseEntity<Void> banUser(@PathVariable long id) {
         try {
             User user = new UserService().getUserById(id);
@@ -66,7 +68,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "users/{unbanUserById}", method = RequestMethod.GET)
+    @RequestMapping(value = "users/unban/{id}", method = RequestMethod.GET)
     public ResponseEntity<Void> unbanUser(@PathVariable long id) {
         try {
             User user = new UserService().getUserById(id);
